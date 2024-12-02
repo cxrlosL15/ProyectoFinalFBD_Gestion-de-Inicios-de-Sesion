@@ -1,0 +1,13 @@
+C:\Users\Carlos\source\repos\S5\ProyectoFinalFBD_Gestion de Inicios de Sesion\ProyectoFinalFBD_Gestion de Inicios de Sesion\bin\Debug\ProyectoFinalFBD_Gestion de Inicios de Sesion.exe.config
+C:\Users\Carlos\source\repos\S5\ProyectoFinalFBD_Gestion de Inicios de Sesion\ProyectoFinalFBD_Gestion de Inicios de Sesion\bin\Debug\ProyectoFinalFBD_Gestion de Inicios de Sesion.exe
+C:\Users\Carlos\source\repos\S5\ProyectoFinalFBD_Gestion de Inicios de Sesion\ProyectoFinalFBD_Gestion de Inicios de Sesion\bin\Debug\ProyectoFinalFBD_Gestion de Inicios de Sesion.pdb
+C:\Users\Carlos\source\repos\S5\ProyectoFinalFBD_Gestion de Inicios de Sesion\ProyectoFinalFBD_Gestion de Inicios de Sesion\obj\Debug\ProyectoFinalFBD_Gestion de Inicios de Sesion.csproj.AssemblyReference.cache
+C:\Users\Carlos\source\repos\S5\ProyectoFinalFBD_Gestion de Inicios de Sesion\ProyectoFinalFBD_Gestion de Inicios de Sesion\obj\Debug\ProyectoFinalFBD_Gestion_de_Inicios_de_Sesion.Login.resources
+C:\Users\Carlos\source\repos\S5\ProyectoFinalFBD_Gestion de Inicios de Sesion\ProyectoFinalFBD_Gestion de Inicios de Sesion\obj\Debug\ProyectoFinalFBD_Gestion_de_Inicios_de_Sesion.Properties.Resources.resources
+C:\Users\Carlos\source\repos\S5\ProyectoFinalFBD_Gestion de Inicios de Sesion\ProyectoFinalFBD_Gestion de Inicios de Sesion\obj\Debug\ProyectoFinalFBD_Gestion de Inicios de Sesion.csproj.GenerateResource.cache
+C:\Users\Carlos\source\repos\S5\ProyectoFinalFBD_Gestion de Inicios de Sesion\ProyectoFinalFBD_Gestion de Inicios de Sesion\obj\Debug\ProyectoFinalFBD_Gestion de Inicios de Sesion.csproj.CoreCompileInputs.cache
+C:\Users\Carlos\source\repos\S5\ProyectoFinalFBD_Gestion de Inicios de Sesion\ProyectoFinalFBD_Gestion de Inicios de Sesion\obj\Debug\ProyectoFinalFBD_Gestion de Inicios de Sesion.exe
+C:\Users\Carlos\source\repos\S5\ProyectoFinalFBD_Gestion de Inicios de Sesion\ProyectoFinalFBD_Gestion de Inicios de Sesion\obj\Debug\ProyectoFinalFBD_Gestion de Inicios de Sesion.pdb
+C:\Users\Carlos\source\repos\S5\ProyectoFinalFBD_Gestion de Inicios de Sesion\ProyectoFinalFBD_Gestion de Inicios de Sesion\obj\Debug\ProyectoFinalFBD_Gestion_de_Inicios_de_Sesion.Consultar.resources
+C:\Users\Carlos\source\repos\S5\ProyectoFinalFBD_Gestion de Inicios de Sesion\ProyectoFinalFBD_Gestion de Inicios de Sesion\obj\Debug\ProyectoFinalFBD_Gestion_de_Inicios_de_Sesion.Main.resources
+C:\Users\Carlos\source\repos\S5\ProyectoFinalFBD_Gestion de Inicios de Sesion\ProyectoFinalFBD_Gestion de Inicios de Sesion\obj\Debug\ProyectoFinalFBD_Gestion_de_Inicios_de_Sesion.Registrar.resources
