@@ -18,7 +18,7 @@ using System.Reflection.Emit;
 namespace ProyectoFinalFBD_Gestion_de_Inicios_de_Sesion
 {
     public partial class Main : Form
-    { 
+    {
         // Variables
         SqlCommand Comando;
         string query = "";
@@ -26,7 +26,7 @@ namespace ProyectoFinalFBD_Gestion_de_Inicios_de_Sesion
         DateTime currentDate;
         DateTimeOffset lastInputTime;
         string IP = "";
-        int ID=0;
+        int ID = 0;
 
 
         //Constructor
@@ -35,7 +35,7 @@ namespace ProyectoFinalFBD_Gestion_de_Inicios_de_Sesion
             InitializeComponent();
             ProcesarEstadoDeSesion(); // Inicializar proceso
 
-            timer1.Start(); // Inicializar temporizador
+            timerInactividad.Start(); // Inicializar temporizador
         }
 
 
@@ -79,10 +79,10 @@ namespace ProyectoFinalFBD_Gestion_de_Inicios_de_Sesion
             this.Close();
             Program.loginEstatico.Show();
         }
-        
+
 
         // Procedimiento de evento al salir de formulario
-        private void Main_FormClosing(object sender, FormClosingEventArgs e)    
+        private void Main_FormClosing(object sender, FormClosingEventArgs e)
         {
             ProcesarSalidaDeLaSesion();
         }
@@ -106,20 +106,25 @@ namespace ProyectoFinalFBD_Gestion_de_Inicios_de_Sesion
 
 
         // Procedimiento que maneja el evento del temporizador
-        private void timer1_Tick(object sender, EventArgs e)
+        private void timerInactividad_Tick(object sender, EventArgs e)
         {
-            // Emplear la conexión de la base de datos
-            using (SqlConnection con = BD_Conexion.GetConnection())
-            {
-                // Definir la consulta
-                query = "UPDATE EstadoDeLaSesion SET UltimaActividadRealizada = @UltimaActividadRealizada WHERE ID = @ID";
-                Comando = new SqlCommand(query, con);
-                Comando.Parameters.AddWithValue("@UltimaActividadRealizada", lastInputTime = DatosInactividad.GetLastInputTime());
-                Comando.Parameters.AddWithValue("@ID", ID);
+            // Evaluar tiempo de inactividad
+            if (DatosInactividad.GetInputIdleTime().TotalSeconds > 10) // 10 segundos
+            {   // Si el tiempo es considerable se guarda, de lo contrario lo ignora
 
-                // Realizar la consulta
-                try { Comando.ExecuteNonQuery(); }
-                catch (Exception ex) { MessageBox.Show("Error " + ex.Message); }
+                // Emplear la conexión de la base de datos
+                using (SqlConnection con = BD_Conexion.GetConnection())
+                {
+                    // Definir la consulta
+                    query = "UPDATE EstadoDeLaSesion SET UltimaActividadRealizada = @UltimaActividadRealizada WHERE ID = @ID";
+                    Comando = new SqlCommand(query, con);
+                    Comando.Parameters.AddWithValue("@UltimaActividadRealizada", lastInputTime = DatosInactividad.GetLastInputTime());
+                    Comando.Parameters.AddWithValue("@ID", ID);
+
+                    // Realizar la consulta
+                    try { Comando.ExecuteNonQuery(); }
+                    catch (Exception ex) { MessageBox.Show("Error " + ex.Message); }
+                }
             }
         }
 

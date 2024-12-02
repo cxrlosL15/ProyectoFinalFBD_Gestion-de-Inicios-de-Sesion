@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.btnSalir = new System.Windows.Forms.Button();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.timerInactividad = new System.Windows.Forms.Timer(this.components);
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -50,10 +50,10 @@
             this.btnSalir.UseVisualStyleBackColor = false;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
-            // timer1
+            // timerInactividad
             // 
-            this.timer1.Interval = 3000;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            this.timerInactividad.Interval = 3000;
+            this.timerInactividad.Tick += new System.EventHandler(this.timerInactividad_Tick);
             // 
             // pictureBox1
             // 
@@ -85,7 +85,7 @@
 
         #endregion
         private System.Windows.Forms.Button btnSalir;
-        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Timer timerInactividad;
         private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
