@@ -40,9 +40,11 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnConsultar = new System.Windows.Forms.Button();
+            this.pbPassword = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbPassword)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -71,6 +73,7 @@
             this.txtContraseña.Location = new System.Drawing.Point(62, 228);
             this.txtContraseña.Multiline = true;
             this.txtContraseña.Name = "txtContraseña";
+            this.txtContraseña.PasswordChar = '*';
             this.txtContraseña.Size = new System.Drawing.Size(221, 30);
             this.txtContraseña.TabIndex = 2;
             // 
@@ -180,12 +183,24 @@
             this.btnConsultar.UseVisualStyleBackColor = false;
             this.btnConsultar.Click += new System.EventHandler(this.btnConsultar_Click);
             // 
+            // pbPassword
+            // 
+            this.pbPassword.Image = global::ProyectoFinalFBD_Gestion_de_Inicios_de_Sesion.Properties.Resources.show;
+            this.pbPassword.Location = new System.Drawing.Point(289, 221);
+            this.pbPassword.Name = "pbPassword";
+            this.pbPassword.Size = new System.Drawing.Size(30, 30);
+            this.pbPassword.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pbPassword.TabIndex = 12;
+            this.pbPassword.TabStop = false;
+            this.pbPassword.Click += new System.EventHandler(this.pbPassword_Click);
+            // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(327, 465);
+            this.ClientSize = new System.Drawing.Size(325, 465);
+            this.Controls.Add(this.pbPassword);
             this.Controls.Add(this.btnConsultar);
             this.Controls.Add(this.btnRegistrar);
             this.Controls.Add(this.btnSalir);
@@ -205,6 +220,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbPassword)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -224,6 +240,7 @@
         private System.Windows.Forms.Button btnSalir;
         private System.Windows.Forms.Button btnRegistrar;
         private System.Windows.Forms.Button btnConsultar;
+        private System.Windows.Forms.PictureBox pbPassword;
     }
 }
 

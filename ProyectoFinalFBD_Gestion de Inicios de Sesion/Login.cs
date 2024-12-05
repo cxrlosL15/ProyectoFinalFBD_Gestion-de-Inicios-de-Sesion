@@ -23,6 +23,7 @@ namespace ProyectoFinalFBD_Gestion_de_Inicios_de_Sesion
         DateTime currentDate;
         string IP = "";
         int usuarioID = 0;
+        bool seePassword = false;
 
 
         // Constructor
@@ -199,6 +200,23 @@ namespace ProyectoFinalFBD_Gestion_de_Inicios_de_Sesion
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux)) { return 2; }
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX)) { return 3; }
             else { return null; }
+        }
+
+        // Controla la visibilidad de la contraseña
+        private void pbPassword_Click(object sender, EventArgs e)
+        {   // Invertir estado
+            seePassword = !seePassword;
+
+            if (seePassword) // Mirar contraseña
+            {
+                txtContraseña.PasswordChar = '\0'; // Modificar propiedad
+                pbPassword.Image = ProyectoFinalFBD_Gestion_de_Inicios_de_Sesion.Properties.Resources.hide; // Asignar imagen correspondiente
+            }
+            else // Ocultar contraseña
+            {
+                txtContraseña.PasswordChar = '*';  // Modificar propiedad
+                pbPassword.Image = ProyectoFinalFBD_Gestion_de_Inicios_de_Sesion.Properties.Resources.show; // Asignar imagen correspondiente
+            }
         }
     }
 }

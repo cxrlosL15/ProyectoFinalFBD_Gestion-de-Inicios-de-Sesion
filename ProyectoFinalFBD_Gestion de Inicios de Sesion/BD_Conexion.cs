@@ -10,7 +10,7 @@ namespace ProyectoFinalFBD_Gestion_de_Inicios_de_Sesion
 {
     internal class BD_Conexion
     {
-        private static string Conexion = "Data Source =DESKTOP-XXXXXX; Initial Catalog = GestionInicioSesion; integrated security=true";
+        private static string Conexion = "Data Source =DESKTOP-XXXXXXX; Initial Catalog = GestionInicioSesion; integrated security=true";
 
         public static SqlConnection GetConnection()
         {
