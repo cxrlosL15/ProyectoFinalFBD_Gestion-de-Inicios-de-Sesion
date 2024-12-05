@@ -137,8 +137,7 @@ namespace ProyectoFinalFBD_Gestion_de_Inicios_de_Sesion
                 {
                     return (int)result; // Devuelve el valor entero del ID
                 }
-                else
-                { return null; }
+                else { return null; }
             }
         }
 

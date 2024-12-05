@@ -5,9 +5,11 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace ProyectoFinalFBD_Gestion_de_Inicios_de_Sesion
 {
@@ -18,13 +20,15 @@ namespace ProyectoFinalFBD_Gestion_de_Inicios_de_Sesion
         string query = "";
         SqlDataAdapter Adaptador = null;
         DataTable Tabla = new DataTable();
-
+        int Index = 0, indexMax, secuencia=1;
+        DataGridViewColumn ultimaColumna;
 
         // Constructor
         public Consultar()
         {
             InitializeComponent();
             CargarInfo();
+            LlenarPanel();
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
@@ -35,6 +39,7 @@ namespace ProyectoFinalFBD_Gestion_de_Inicios_de_Sesion
 
         private void Consultar_FormClosing(object sender, FormClosingEventArgs e) {  }
 
+
         // Procedimiento que muestra inicialmente la información en el DataGridView
         private void CargarInfo()
         {
@@ -42,7 +47,9 @@ namespace ProyectoFinalFBD_Gestion_de_Inicios_de_Sesion
             using (SqlConnection con = BD_Conexion.GetConnection())
             {
                 // Consulta que relaciona al DataGridView como destino de los datos
-                query = "SELECT * FROM Usuarios";
+                // Se relaciona las tablas para recuperar datos de Usuarios.SexoID en Sexo.Descripcion
+                query = "SELECT Usuarios.ID, Usuarios.Usuario, Usuarios.Contrasena, Usuarios.FechaDeRegistro, Usuarios.CorreoElectronico, Usuarios.Telefono, Usuarios.Nombre, Usuarios.ApellidoP, Usuarios.ApellidoM, Usuarios.Edad," +
+                        "Sexo.Descripcion AS Sexo FROM [Usuarios] INNER JOIN Sexo ON Usuarios.SexoID = Sexo.ID";
                 Adaptador = new SqlDataAdapter(query, con);
                 Adaptador.Fill(Tabla);
                 dgvRegistros.DataSource = Tabla;
@@ -56,36 +63,12 @@ namespace ProyectoFinalFBD_Gestion_de_Inicios_de_Sesion
             dgvRegistros.ClearSelection();
             using (SqlConnection con = BD_Conexion.GetConnection())
             {
-                query = "SELECT * FROM Usuarios";
+                query = "SELECT Usuarios.ID, Usuarios.Usuario, Usuarios.Contrasena, Usuarios.FechaDeRegistro, Usuarios.CorreoElectronico, Usuarios.Telefono, Usuarios.Nombre, Usuarios.ApellidoP, Usuarios.ApellidoM, Usuarios.Edad," +
+                        "Sexo.Descripcion AS Sexo FROM [Usuarios] INNER JOIN Sexo ON Usuarios.SexoID = Sexo.ID";
                 Adaptador = new SqlDataAdapter(query, con);
                 Adaptador.Fill(Tabla);
                 dgvRegistros.DataSource = Tabla;
             }
-        }
-
-        private void txtBuscar_TextChanged(object sender, EventArgs e)
-        {
-            if (txtBuscar.Text != "")
-            {
-                dgvRegistros.CurrentCell = null;
-
-                //Recorrer filas para desaparecer todas
-                foreach (DataGridViewRow row in dgvRegistros.Rows)
-                { row.Visible = false; }
-
-                //Se recorren las filas para buscar el valor
-                foreach (DataGridViewRow row in dgvRegistros.Rows)
-                {
-                    //Se recorre de celda en celda la fila del foreach anterior
-                    foreach (DataGridViewCell cell in row.Cells)
-                    {
-                        //Comparar celda con el textbox de busqueda
-                        if (cell.Value.ToString().ToUpper().IndexOf(txtBuscar.Text.ToUpper()) == 0)
-                        { row.Visible = true;     break; }
-                    }
-                }
-            }
-            else  { ActualizarInfo();}
         }
 
         // Procedimiento que intenta eliminar un registro
@@ -118,12 +101,132 @@ namespace ProyectoFinalFBD_Gestion_de_Inicios_de_Sesion
                             ActualizarInfo(); // Reflejar en la tabla la eliminación
                         }
                         catch (Exception ex)
-                        {  MessageBox.Show("Error " + ex.Message); }
+                        { MessageBox.Show("Error " + ex.Message); }
                     }
                 }
             }
             else
-            { throw new Exception("Seleccione una fila para eliminar.");  }
+            { throw new Exception("Seleccione una fila para eliminar."); }
         }
+
+
+        private void txtBuscar_TextChanged(object sender, EventArgs e)
+        {
+            if (txtBuscar.Text != "")
+            {
+                dgvRegistros.CurrentCell = null;
+
+                //Recorrer filas para desaparecer todas
+                foreach (DataGridViewRow row in dgvRegistros.Rows)
+                { row.Visible = false; }
+
+                //Se recorren las filas para buscar el valor
+                foreach (DataGridViewRow row in dgvRegistros.Rows)
+                {
+                    //Se recorre de celda en celda la fila del foreach anterior
+                    foreach (DataGridViewCell cell in row.Cells)
+                    {
+                        //Comparar celda con el textbox de busqueda
+                        if (cell.Value.ToString().ToUpper().IndexOf(txtBuscar.Text.ToUpper()) == 0)
+                        { row.Visible = true;     break; }
+                    }
+                }
+            }
+            else  { ActualizarInfo();}
+        }
+
+
+        // Procedimineto que inicializa la información en el panel
+        private void LlenarPanel()
+        {
+            // Proceso funcional para mostrar la información en el panel
+            txtUsuario.Text = dgvRegistros.Rows[0].Cells[1].Value.ToString();
+            txtEmail.Text = dgvRegistros.Rows[0].Cells[4].Value.ToString();
+            txtTelefono.Text = dgvRegistros.Rows[0].Cells[5].Value.ToString();
+            txtNombre.Text = dgvRegistros.Rows[0].Cells[6].Value.ToString();
+            txtApellidoM.Text = dgvRegistros.Rows[0].Cells[7].Value.ToString();
+            txtApellidoP.Text = dgvRegistros.Rows[0].Cells[8].Value.ToString();
+            txtEdad.Text = dgvRegistros.Rows[0].Cells[9].Value.ToString();
+            txtSexo.Text = dgvRegistros.Rows[0].Cells[10].Value.ToString();
+
+            txtIndexPanel.Text = secuencia.ToString(); // Proceso visual para el textBox que sincroniza el índice
+            indexMax = (int)TotalRegistros() - 1;     // Obtiene el limite superior para la navegación derecha
+        }
+
+
+        // Procedimiento que controla la navegación izquierda
+        private void pbBack_Click(object sender, EventArgs e)
+        {
+            if (Index >= 1) // Evaluar límite inferior
+            {
+                // Proceso visual para el textBox que sincroniza el índice
+                secuencia--; 
+                txtIndexPanel.Text = secuencia.ToString();
+
+                // Proceso funcional para mostrar la información en el panel
+                Index--;
+                txtUsuario.Text = dgvRegistros.Rows[Index].Cells[1].Value.ToString();
+                txtEmail.Text = dgvRegistros.Rows[Index].Cells[4].Value.ToString();
+                txtTelefono.Text = dgvRegistros.Rows[Index].Cells[5].Value.ToString();
+                txtNombre.Text = dgvRegistros.Rows[Index].Cells[6].Value.ToString();
+                txtApellidoM.Text = dgvRegistros.Rows[Index].Cells[7].Value.ToString();
+                txtApellidoP.Text = dgvRegistros.Rows[Index].Cells[8].Value.ToString();
+                txtEdad.Text = dgvRegistros.Rows[Index].Cells[9].Value.ToString();
+                txtSexo.Text = dgvRegistros.Rows[Index].Cells[10].Value.ToString();
+
+            }
+            else // No corresponde
+            { MessageBox.Show("No es posible realizar la operación, índice fuera de rango!", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning); }
+        }
+
+
+        // Procedimiento que controla la navegación derecha
+        private void pbForward_Click(object sender, EventArgs e)
+        {
+            if (Index < indexMax) // Evaluar límite superior
+            {
+                // Proceso visual para el textBox que sincroniza el índice
+                secuencia++; 
+                txtIndexPanel.Text = secuencia.ToString();
+
+                // Proceso funcional para mostrar la información en el panel
+                Index++;
+                txtUsuario.Text = dgvRegistros.Rows[Index].Cells[1].Value.ToString();
+                txtEmail.Text = dgvRegistros.Rows[Index].Cells[4].Value.ToString();
+                txtTelefono.Text = dgvRegistros.Rows[Index].Cells[5].Value.ToString();
+                txtNombre.Text = dgvRegistros.Rows[Index].Cells[6].Value.ToString();
+                txtApellidoM.Text = dgvRegistros.Rows[Index].Cells[7].Value.ToString();
+                txtApellidoP.Text = dgvRegistros.Rows[Index].Cells[8].Value.ToString();
+                txtEdad.Text = dgvRegistros.Rows[Index].Cells[9].Value.ToString();
+                txtSexo.Text = dgvRegistros.Rows[Index].Cells[10].Value.ToString();
+            }
+            else // No corresponde
+            { MessageBox.Show("No es posible realizar la operación, índice fuera de rango!", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning); }
+        }
+
+
+        // Función que intenta obtener la totalidad de registro
+        private int? TotalRegistros()
+        {
+            // Emplear la conexión de la base de datos
+            using (SqlConnection con = BD_Conexion.GetConnection())
+            {
+                // Definir la consulta
+                query = "SELECT COUNT(*) FROM Usuarios;";
+                Comando = new SqlCommand(query, con);
+
+                // Realiza la consulta y se guarda el objeto devuelto
+                object result = Comando.ExecuteScalar();
+
+                // Comprueba si es válido
+                if (result != null && result != DBNull.Value)
+                {
+                    return (int)result; // Devuelve el valor entero del ID
+                }
+                else { return null; }
+            }
+        }
+
+
     }
 }
