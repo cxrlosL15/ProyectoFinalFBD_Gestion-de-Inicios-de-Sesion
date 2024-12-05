@@ -24,7 +24,7 @@ namespace ProyectoFinalFBD_Gestion_de_Inicios_de_Sesion
         public Consultar()
         {
             InitializeComponent();
-            CargarInfo(); 
+            CargarInfo();
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
@@ -63,7 +63,6 @@ namespace ProyectoFinalFBD_Gestion_de_Inicios_de_Sesion
             }
         }
 
-        // En construción...
         private void txtBuscar_TextChanged(object sender, EventArgs e)
         {
             if (txtBuscar.Text != "")
@@ -86,6 +85,7 @@ namespace ProyectoFinalFBD_Gestion_de_Inicios_de_Sesion
                     }
                 }
             }
+            else  { ActualizarInfo();}
         }
 
         // Procedimiento que intenta eliminar un registro

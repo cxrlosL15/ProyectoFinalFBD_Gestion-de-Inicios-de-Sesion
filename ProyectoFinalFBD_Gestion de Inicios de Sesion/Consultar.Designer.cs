@@ -51,6 +51,7 @@
             // 
             // dgvRegistros
             // 
+            this.dgvRegistros.AllowUserToAddRows = false;
             this.dgvRegistros.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvRegistros.Location = new System.Drawing.Point(28, 99);
             this.dgvRegistros.Name = "dgvRegistros";
