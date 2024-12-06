@@ -65,7 +65,8 @@
             this.txtUsuario.Multiline = true;
             this.txtUsuario.Name = "txtUsuario";
             this.txtUsuario.Size = new System.Drawing.Size(224, 29);
-            this.txtUsuario.TabIndex = 1;
+            this.txtUsuario.TabIndex = 3;
+            this.txtUsuario.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtUsuario_KeyPress);
             // 
             // txtContraseña
             // 
@@ -75,7 +76,8 @@
             this.txtContraseña.Name = "txtContraseña";
             this.txtContraseña.PasswordChar = '*';
             this.txtContraseña.Size = new System.Drawing.Size(221, 30);
-            this.txtContraseña.TabIndex = 2;
+            this.txtContraseña.TabIndex = 4;
+            this.txtContraseña.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtContraseña_KeyPress);
             // 
             // btnEntrar
             // 
@@ -87,7 +89,7 @@
             this.btnEntrar.Location = new System.Drawing.Point(31, 283);
             this.btnEntrar.Name = "btnEntrar";
             this.btnEntrar.Size = new System.Drawing.Size(271, 46);
-            this.btnEntrar.TabIndex = 3;
+            this.btnEntrar.TabIndex = 5;
             this.btnEntrar.Text = "ENTRAR";
             this.btnEntrar.UseVisualStyleBackColor = false;
             this.btnEntrar.Click += new System.EventHandler(this.btnEntrar_Click);
@@ -98,7 +100,7 @@
             this.panel1.Location = new System.Drawing.Point(16, 196);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(270, 2);
-            this.panel1.TabIndex = 7;
+            this.panel1.TabIndex = 1;
             // 
             // panel2
             // 
@@ -106,19 +108,19 @@
             this.panel2.Location = new System.Drawing.Point(16, 264);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(270, 2);
-            this.panel2.TabIndex = 8;
+            this.panel2.TabIndex = 2;
             // 
             // btnSalir
             // 
             this.btnSalir.BackColor = System.Drawing.Color.White;
             this.btnSalir.FlatAppearance.BorderSize = 0;
             this.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSalir.Font = new System.Drawing.Font("Bahnschrift", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSalir.Font = new System.Drawing.Font("Bahnschrift", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSalir.ForeColor = System.Drawing.Color.Salmon;
-            this.btnSalir.Location = new System.Drawing.Point(114, 428);
+            this.btnSalir.Location = new System.Drawing.Point(32, 428);
             this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(94, 34);
-            this.btnSalir.TabIndex = 9;
+            this.btnSalir.Size = new System.Drawing.Size(267, 34);
+            this.btnSalir.TabIndex = 8;
             this.btnSalir.Text = "Salir";
             this.btnSalir.UseVisualStyleBackColor = false;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
@@ -133,7 +135,7 @@
             this.btnRegistrar.Location = new System.Drawing.Point(32, 335);
             this.btnRegistrar.Name = "btnRegistrar";
             this.btnRegistrar.Size = new System.Drawing.Size(267, 34);
-            this.btnRegistrar.TabIndex = 10;
+            this.btnRegistrar.TabIndex = 6;
             this.btnRegistrar.Text = "REGISTRAR";
             this.btnRegistrar.UseVisualStyleBackColor = false;
             this.btnRegistrar.Click += new System.EventHandler(this.btnRegistrar_Click);
@@ -178,7 +180,7 @@
             this.btnConsultar.Location = new System.Drawing.Point(32, 375);
             this.btnConsultar.Name = "btnConsultar";
             this.btnConsultar.Size = new System.Drawing.Size(267, 34);
-            this.btnConsultar.TabIndex = 11;
+            this.btnConsultar.TabIndex = 7;
             this.btnConsultar.Text = "CONSULTAR";
             this.btnConsultar.UseVisualStyleBackColor = false;
             this.btnConsultar.Click += new System.EventHandler(this.btnConsultar_Click);

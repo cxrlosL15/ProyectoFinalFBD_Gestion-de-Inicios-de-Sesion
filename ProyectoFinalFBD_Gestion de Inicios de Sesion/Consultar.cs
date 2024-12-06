@@ -21,7 +21,6 @@ namespace ProyectoFinalFBD_Gestion_de_Inicios_de_Sesion
         SqlDataAdapter Adaptador = null;
         DataTable Tabla = new DataTable();
         int Index = 0, indexMax, secuencia=1;
-        DataGridViewColumn ultimaColumna;
 
         // Constructor
         public Consultar()
@@ -39,7 +38,6 @@ namespace ProyectoFinalFBD_Gestion_de_Inicios_de_Sesion
 
         private void Consultar_FormClosing(object sender, FormClosingEventArgs e) {  }
 
-
         // Procedimiento que muestra inicialmente la información en el DataGridView
         private void CargarInfo()
         {
@@ -56,84 +54,6 @@ namespace ProyectoFinalFBD_Gestion_de_Inicios_de_Sesion
             }
         }
 
-        // Procedimiento que actualiza la información del DataGridView
-        private void ActualizarInfo()
-        {
-            Tabla.Clear();
-            dgvRegistros.ClearSelection();
-            using (SqlConnection con = BD_Conexion.GetConnection())
-            {
-                query = "SELECT Usuarios.ID, Usuarios.Usuario, Usuarios.Contrasena, Usuarios.FechaDeRegistro, Usuarios.CorreoElectronico, Usuarios.Telefono, Usuarios.Nombre, Usuarios.ApellidoP, Usuarios.ApellidoM, Usuarios.Edad," +
-                        "Sexo.Descripcion AS Sexo FROM [Usuarios] INNER JOIN Sexo ON Usuarios.SexoID = Sexo.ID";
-                Adaptador = new SqlDataAdapter(query, con);
-                Adaptador.Fill(Tabla);
-                dgvRegistros.DataSource = Tabla;
-            }
-        }
-
-        // Procedimiento que intenta eliminar un registro
-        private void btnEliminar_Click(object sender, EventArgs e)
-        {
-            int seleccion = dgvRegistros.CurrentRow.Index; // Guardar el indice seleccionado de la tabla
-
-            // Verificar si hay una fila seleccionada
-            if (dgvRegistros.CurrentRow != null && dgvRegistros.CurrentRow.Index > -1)
-            {
-                DialogResult confirmacion = MessageBox.Show("¿Está seguro que desea eliminar el registro?",
-                    "Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-
-                // Usuario confirma la eliminación
-                if (confirmacion == DialogResult.Yes)
-                {
-                    // Emplear la conexión de la base de datos
-                    using (SqlConnection con = BD_Conexion.GetConnection())
-                    {
-                        // Definir la consulta
-                        query = "DELETE FROM Usuarios WHERE ID = @Id DELETE FROM IntentosDeSesion WHERE UsuarioID = @Id DELETE FROM EstadoDeLaSesion WHERE UsuarioID = @Id";
-                        Comando = new SqlCommand(query, con);
-                        Comando.Parameters.AddWithValue("@Id", dgvRegistros.Rows[seleccion].Cells[0].Value);
-
-                        // Realizar la consulta
-                        try
-                        {
-                            Comando.ExecuteNonQuery();
-                            MessageBox.Show("Registro Eliminado");
-                            ActualizarInfo(); // Reflejar en la tabla la eliminación
-                        }
-                        catch (Exception ex)
-                        { MessageBox.Show("Error " + ex.Message); }
-                    }
-                }
-            }
-            else
-            { throw new Exception("Seleccione una fila para eliminar."); }
-        }
-
-
-        private void txtBuscar_TextChanged(object sender, EventArgs e)
-        {
-            if (txtBuscar.Text != "")
-            {
-                dgvRegistros.CurrentCell = null;
-
-                //Recorrer filas para desaparecer todas
-                foreach (DataGridViewRow row in dgvRegistros.Rows)
-                { row.Visible = false; }
-
-                //Se recorren las filas para buscar el valor
-                foreach (DataGridViewRow row in dgvRegistros.Rows)
-                {
-                    //Se recorre de celda en celda la fila del foreach anterior
-                    foreach (DataGridViewCell cell in row.Cells)
-                    {
-                        //Comparar celda con el textbox de busqueda
-                        if (cell.Value.ToString().ToUpper().IndexOf(txtBuscar.Text.ToUpper()) == 0)
-                        { row.Visible = true;     break; }
-                    }
-                }
-            }
-            else  { ActualizarInfo();}
-        }
 
 
         // Procedimineto que inicializa la información en el panel
@@ -152,7 +72,6 @@ namespace ProyectoFinalFBD_Gestion_de_Inicios_de_Sesion
             txtIndexPanel.Text = secuencia.ToString(); // Proceso visual para el textBox que sincroniza el índice
             indexMax = (int)TotalRegistros() - 1;     // Obtiene el limite superior para la navegación derecha
         }
-
 
         // Procedimiento que controla la navegación izquierda
         private void pbBack_Click(object sender, EventArgs e)
@@ -178,7 +97,6 @@ namespace ProyectoFinalFBD_Gestion_de_Inicios_de_Sesion
             else // No corresponde
             { MessageBox.Show("No es posible realizar la operación, índice fuera de rango!", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning); }
         }
-
 
         // Procedimiento que controla la navegación derecha
         private void pbForward_Click(object sender, EventArgs e)

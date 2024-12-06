@@ -201,6 +201,7 @@ namespace ProyectoFinalFBD_Gestion_de_Inicios_de_Sesion
             else { return null; }
         }
 
+
         // Controla la visibilidad de la contraseña
         private void pbPassword_Click(object sender, EventArgs e)
         {   // Invertir estado
@@ -217,5 +218,13 @@ namespace ProyectoFinalFBD_Gestion_de_Inicios_de_Sesion
                 pbPassword.Image = ProyectoFinalFBD_Gestion_de_Inicios_de_Sesion.Properties.Resources.show; // Asignar imagen correspondiente
             }
         }
+
+        // Procedimientos que maneja el evento
+        private void txtUsuario_KeyPress(object sender, KeyPressEventArgs e)
+        { if(e.KeyChar == Convert.ToChar(Keys.Enter)) { txtContraseña.Focus(); } }
+
+        private void txtContraseña_KeyPress(object sender, KeyPressEventArgs e)
+        { if (e.KeyChar == Convert.ToChar(Keys.Enter)) { btnEntrar.Focus(); } }
+
     }
 }

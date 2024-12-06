@@ -73,6 +73,16 @@ namespace ProyectoFinalFBD_Gestion_de_Inicios_de_Sesion.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap BackFix {
+            get {
+                object obj = ResourceManager.GetObject("BackFix", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ExampleMainProgram {
             get {
                 object obj = ResourceManager.GetObject("ExampleMainProgram", resourceCulture);
@@ -86,6 +96,16 @@ namespace ProyectoFinalFBD_Gestion_de_Inicios_de_Sesion.Properties {
         internal static System.Drawing.Bitmap Forward {
             get {
                 object obj = ResourceManager.GetObject("Forward", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ForwardFx {
+            get {
+                object obj = ResourceManager.GetObject("ForwardFx", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

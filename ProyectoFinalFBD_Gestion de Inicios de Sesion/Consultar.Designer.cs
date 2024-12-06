@@ -30,12 +30,9 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.dgvRegistros = new System.Windows.Forms.DataGridView();
-            this.btnEliminar = new System.Windows.Forms.Button();
             this.btnSalir = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.txtBuscar = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.txtSexo = new System.Windows.Forms.TextBox();
             this.txtEdad = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -51,14 +48,13 @@
             this.label4 = new System.Windows.Forms.Label();
             this.txtUsuario = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.pbBack = new System.Windows.Forms.PictureBox();
-            this.pbForward = new System.Windows.Forms.PictureBox();
-            this.txtSexo = new System.Windows.Forms.TextBox();
             this.txtIndexPanel = new System.Windows.Forms.TextBox();
+            this.pbForward = new System.Windows.Forms.PictureBox();
+            this.pbBack = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRegistros)).BeginInit();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbBack)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbForward)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbBack)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -81,65 +77,20 @@
             this.dgvRegistros.Size = new System.Drawing.Size(351, 150);
             this.dgvRegistros.TabIndex = 3;
             // 
-            // btnEliminar
-            // 
-            this.btnEliminar.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.btnEliminar.FlatAppearance.BorderSize = 0;
-            this.btnEliminar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEliminar.Font = new System.Drawing.Font("Bahnschrift", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEliminar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(103)))), ((int)(((byte)(206)))));
-            this.btnEliminar.Location = new System.Drawing.Point(26, 460);
-            this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(334, 34);
-            this.btnEliminar.TabIndex = 12;
-            this.btnEliminar.Text = "ELIMINAR";
-            this.btnEliminar.UseVisualStyleBackColor = false;
-            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
-            // 
             // btnSalir
             // 
-            this.btnSalir.BackColor = System.Drawing.Color.GhostWhite;
+            this.btnSalir.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(103)))), ((int)(((byte)(206)))));
             this.btnSalir.FlatAppearance.BorderSize = 0;
             this.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSalir.Font = new System.Drawing.Font("Bahnschrift", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSalir.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(103)))), ((int)(((byte)(206)))));
-            this.btnSalir.Location = new System.Drawing.Point(145, 500);
+            this.btnSalir.ForeColor = System.Drawing.Color.White;
+            this.btnSalir.Location = new System.Drawing.Point(19, 432);
             this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(94, 34);
+            this.btnSalir.Size = new System.Drawing.Size(333, 34);
             this.btnSalir.TabIndex = 13;
-            this.btnSalir.Text = "Salir";
+            this.btnSalir.Text = "SALIR";
             this.btnSalir.UseVisualStyleBackColor = false;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.Black;
-            this.label2.Location = new System.Drawing.Point(22, 61);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(90, 23);
-            this.label2.TabIndex = 14;
-            this.label2.Text = "Buscar:";
-            // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(189)))), ((int)(((byte)(210)))), ((int)(((byte)(239)))));
-            this.panel1.Location = new System.Drawing.Point(109, 82);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(250, 2);
-            this.panel1.TabIndex = 15;
-            // 
-            // txtBuscar
-            // 
-            this.txtBuscar.BackColor = System.Drawing.Color.GhostWhite;
-            this.txtBuscar.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtBuscar.Location = new System.Drawing.Point(109, 52);
-            this.txtBuscar.Multiline = true;
-            this.txtBuscar.Name = "txtBuscar";
-            this.txtBuscar.Size = new System.Drawing.Size(251, 29);
-            this.txtBuscar.TabIndex = 16;
-            this.txtBuscar.TextChanged += new System.EventHandler(this.txtBuscar_TextChanged);
             // 
             // panel2
             // 
@@ -159,10 +110,20 @@
             this.panel2.Controls.Add(this.label4);
             this.panel2.Controls.Add(this.txtUsuario);
             this.panel2.Controls.Add(this.label11);
-            this.panel2.Location = new System.Drawing.Point(26, 97);
+            this.panel2.Location = new System.Drawing.Point(18, 57);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(334, 303);
             this.panel2.TabIndex = 17;
+            // 
+            // txtSexo
+            // 
+            this.txtSexo.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtSexo.Enabled = false;
+            this.txtSexo.Location = new System.Drawing.Point(157, 257);
+            this.txtSexo.Multiline = true;
+            this.txtSexo.Name = "txtSexo";
+            this.txtSexo.Size = new System.Drawing.Size(159, 17);
+            this.txtSexo.TabIndex = 19;
             // 
             // txtEdad
             // 
@@ -314,23 +275,24 @@
             this.label11.TabIndex = 3;
             this.label11.Text = "Nombre de Usuario:";
             // 
-            // pbBack
+            // txtIndexPanel
             // 
-            this.pbBack.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pbBack.Image = global::ProyectoFinalFBD_Gestion_de_Inicios_de_Sesion.Properties.Resources.Back;
-            this.pbBack.Location = new System.Drawing.Point(99, 406);
-            this.pbBack.Name = "pbBack";
-            this.pbBack.Size = new System.Drawing.Size(48, 48);
-            this.pbBack.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.pbBack.TabIndex = 18;
-            this.pbBack.TabStop = false;
-            this.pbBack.Click += new System.EventHandler(this.pbBack_Click);
+            this.txtIndexPanel.BackColor = System.Drawing.Color.GhostWhite;
+            this.txtIndexPanel.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtIndexPanel.Enabled = false;
+            this.txtIndexPanel.Font = new System.Drawing.Font("Impact", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtIndexPanel.Location = new System.Drawing.Point(176, 369);
+            this.txtIndexPanel.Multiline = true;
+            this.txtIndexPanel.Name = "txtIndexPanel";
+            this.txtIndexPanel.Size = new System.Drawing.Size(36, 48);
+            this.txtIndexPanel.TabIndex = 20;
+            this.txtIndexPanel.Text = "1";
             // 
             // pbForward
             // 
             this.pbForward.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pbForward.Image = global::ProyectoFinalFBD_Gestion_de_Inicios_de_Sesion.Properties.Resources.Forward;
-            this.pbForward.Location = new System.Drawing.Point(233, 406);
+            this.pbForward.Image = global::ProyectoFinalFBD_Gestion_de_Inicios_de_Sesion.Properties.Resources.ForwardFx;
+            this.pbForward.Location = new System.Drawing.Point(226, 369);
             this.pbForward.Name = "pbForward";
             this.pbForward.Size = new System.Drawing.Size(48, 48);
             this.pbForward.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -338,44 +300,29 @@
             this.pbForward.TabStop = false;
             this.pbForward.Click += new System.EventHandler(this.pbForward_Click);
             // 
-            // txtSexo
+            // pbBack
             // 
-            this.txtSexo.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtSexo.Enabled = false;
-            this.txtSexo.Location = new System.Drawing.Point(157, 257);
-            this.txtSexo.Multiline = true;
-            this.txtSexo.Name = "txtSexo";
-            this.txtSexo.Size = new System.Drawing.Size(159, 17);
-            this.txtSexo.TabIndex = 19;
-            // 
-            // txtIndexPanel
-            // 
-            this.txtIndexPanel.BackColor = System.Drawing.Color.GhostWhite;
-            this.txtIndexPanel.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtIndexPanel.Enabled = false;
-            this.txtIndexPanel.Font = new System.Drawing.Font("Impact", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtIndexPanel.Location = new System.Drawing.Point(183, 406);
-            this.txtIndexPanel.Multiline = true;
-            this.txtIndexPanel.Name = "txtIndexPanel";
-            this.txtIndexPanel.Size = new System.Drawing.Size(36, 48);
-            this.txtIndexPanel.TabIndex = 20;
-            this.txtIndexPanel.Text = "1";
+            this.pbBack.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pbBack.Image = global::ProyectoFinalFBD_Gestion_de_Inicios_de_Sesion.Properties.Resources.BackFix;
+            this.pbBack.Location = new System.Drawing.Point(92, 369);
+            this.pbBack.Name = "pbBack";
+            this.pbBack.Size = new System.Drawing.Size(48, 48);
+            this.pbBack.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pbBack.TabIndex = 18;
+            this.pbBack.TabStop = false;
+            this.pbBack.Click += new System.EventHandler(this.pbBack_Click);
             // 
             // Consultar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.GhostWhite;
-            this.ClientSize = new System.Drawing.Size(376, 539);
+            this.ClientSize = new System.Drawing.Size(368, 479);
             this.Controls.Add(this.txtIndexPanel);
             this.Controls.Add(this.pbForward);
             this.Controls.Add(this.pbBack);
             this.Controls.Add(this.panel2);
-            this.Controls.Add(this.txtBuscar);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.btnSalir);
-            this.Controls.Add(this.btnEliminar);
             this.Controls.Add(this.dgvRegistros);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -385,8 +332,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvRegistros)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbBack)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbForward)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbBack)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -396,11 +343,7 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView dgvRegistros;
-        private System.Windows.Forms.Button btnEliminar;
         private System.Windows.Forms.Button btnSalir;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.TextBox txtBuscar;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.TextBox txtEdad;
         private System.Windows.Forms.Label label10;

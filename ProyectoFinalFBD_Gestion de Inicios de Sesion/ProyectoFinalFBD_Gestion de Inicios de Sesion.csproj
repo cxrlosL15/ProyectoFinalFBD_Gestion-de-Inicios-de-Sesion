@@ -133,5 +133,11 @@
   <ItemGroup>
     <None Include="Resources\Forward.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BackFix.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ForwardFx.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
