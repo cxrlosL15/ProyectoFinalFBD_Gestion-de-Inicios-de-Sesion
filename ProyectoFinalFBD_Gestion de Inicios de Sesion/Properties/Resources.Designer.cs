@@ -141,6 +141,38 @@ namespace ProyectoFinalFBD_Gestion_de_Inicios_de_Sesion.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a -- Crear la base de datos
+        ///CREATE DATABASE GestionInicioSesion;
+        ///GO
+        ///
+        ///-- Usar la base de datos creada
+        ///USE GestionInicioSesion;
+        ///GO
+        ///
+        ///-- Crear la tabla Sexo
+        ///CREATE TABLE Sexo (
+        ///    ID INT PRIMARY KEY IDENTITY(1,1),
+        ///    Descripcion VARCHAR(50) NOT NULL
+        ///);
+        ///
+        ///-- Crear la tabla SistemaOperativo
+        ///CREATE TABLE SistemaOperativo (
+        ///    ID INT PRIMARY KEY IDENTITY(1,1),
+        ///    Descripcion VARCHAR(50) NOT NULL
+        ///);
+        ///
+        ///-- Crear la tabla Usuarios
+        ///CREATE TABLE Usuarios (
+        ///    ID INT PRIMARY KEY IDENTITY(1,1),
+        ///     [resto de la cadena truncado]&quot;;.
+        /// </summary>
+        internal static string SQLQuery_BD_GestionInicioSesion {
+            get {
+                return ResourceManager.GetString("SQLQuery_BD_GestionInicioSesion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap user_244 {

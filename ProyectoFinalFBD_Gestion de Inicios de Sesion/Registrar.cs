@@ -50,35 +50,39 @@ namespace ProyectoFinalFBD_Gestion_de_Inicios_de_Sesion
         {
             // Comprueba el llenado de la información
             if(ValidarCampoVacio())
-            {   
-                // Emplear la conexión de la base de datos
-                using (SqlConnection con = BD_Conexion.GetConnection())
+            {   // Comprueba la integridad de la información
+                if (Validaciones())
                 {
-                    // Definir la consulta
-                    query = "INSERT INTO Usuarios(Usuario, Contrasena, FechaDeRegistro, CorreoElectronico, Telefono, Nombre, ApellidoP, ApellidoM, Edad, SexoID) VALUES (@Usuario, @Contrasena, @FechaDeRegistro, @CorreoElectronico, @Telefono, @Nombre, @ApellidoP, @ApellidoM, @Edad, @SexoID)";
-                    Comando = new SqlCommand(query, con);
-
-                    Comando.Parameters.AddWithValue("@Usuario", txtUsuario.Text);
-                    Comando.Parameters.AddWithValue("@Contrasena", txtContraseña.Text);
-                    Comando.Parameters.AddWithValue("@FechaDeRegistro", currentDate = DateTime.Now);
-                    Comando.Parameters.AddWithValue("@CorreoElectronico", txtEmail.Text);
-                    Comando.Parameters.AddWithValue("@Telefono", txtTelefono.Text);
-                    Comando.Parameters.AddWithValue("@Nombre", txtNombre.Text);
-                    Comando.Parameters.AddWithValue("@ApellidoP", txtApellidoP.Text);
-                    Comando.Parameters.AddWithValue("@ApellidoM", txtApellidoM.Text);
-                    Comando.Parameters.AddWithValue("@Edad", txtEdad.Text);
-                    Comando.Parameters.AddWithValue("@SexoID", ObtenerSexo());
-
-                    // Realizar la consulta
-                    try
+                    // Emplear la conexión de la base de datos
+                    using (SqlConnection con = BD_Conexion.GetConnection())
                     {
-                        Comando.ExecuteNonQuery();
-                        MessageBox.Show("Registro Insertado");
-                        LimpiarCampos(); ActualizarInfo();
+                        // Definir la consulta
+                        query = "INSERT INTO Usuarios(Usuario, Contrasena, FechaDeRegistro, CorreoElectronico, Telefono, Nombre, ApellidoP, ApellidoM, Edad, SexoID) VALUES (@Usuario, @Contrasena, @FechaDeRegistro, @CorreoElectronico, @Telefono, @Nombre, @ApellidoP, @ApellidoM, @Edad, @SexoID)";
+                        Comando = new SqlCommand(query, con);
 
+                        Comando.Parameters.AddWithValue("@Usuario", txtUsuario.Text);
+                        Comando.Parameters.AddWithValue("@Contrasena", txtContraseña.Text);
+                        Comando.Parameters.AddWithValue("@FechaDeRegistro", currentDate = DateTime.Now);
+                        Comando.Parameters.AddWithValue("@CorreoElectronico", txtEmail.Text);
+                        Comando.Parameters.AddWithValue("@Telefono", txtTelefono.Text);
+                        Comando.Parameters.AddWithValue("@Nombre", txtNombre.Text);
+                        Comando.Parameters.AddWithValue("@ApellidoP", txtApellidoP.Text);
+                        Comando.Parameters.AddWithValue("@ApellidoM", txtApellidoM.Text);
+                        Comando.Parameters.AddWithValue("@Edad", txtEdad.Text);
+                        Comando.Parameters.AddWithValue("@SexoID", ObtenerSexo());
+
+                        // Realizar la consulta
+                        try
+                        {
+                            Comando.ExecuteNonQuery();
+                            MessageBox.Show("Registro Insertado");
+                            LimpiarCampos(); ActualizarInfo();
+
+                        }
+                        catch (Exception ex) { MessageBox.Show("Error " + ex.Message); }
                     }
-                    catch (Exception ex) { MessageBox.Show("Error " + ex.Message); }
                 }
+                else { MessageBox.Show("¡Edad fuera de rango!"); }
             }
             else { MessageBox.Show("Se requiere llenar todos los campos"); }
         }
@@ -179,6 +183,13 @@ namespace ProyectoFinalFBD_Gestion_de_Inicios_de_Sesion
         {
             return txtUsuario.Text != "" && txtContraseña.Text != "" && txtEmail.Text != "" && txtTelefono.Text != "" && txtNombre.Text != "" && txtApellidoP.Text != "" && txtApellidoM.Text != "" && txtEdad.Text != "" && cmbSexo.SelectedIndex != -1;
         }
+        private bool Validaciones()
+        {
+            int x = Convert.ToInt32(txtEdad.Text);
+
+            return x >= 18 && x <= 100;
+        }
+
 
         // Procedimiento que maneja la búsqueda al cambiar el texto
         private void txtBuscar_TextChanged(object sender, EventArgs e)

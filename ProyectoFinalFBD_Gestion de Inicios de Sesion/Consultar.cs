@@ -26,8 +26,13 @@ namespace ProyectoFinalFBD_Gestion_de_Inicios_de_Sesion
         public Consultar()
         {
             InitializeComponent();
-            CargarInfo();
-            LlenarPanel();
+
+            // Comprobar si tiene datos por mostrar
+            if (dgvRegistros.Rows.Count == 0) // VACÍO
+            { MessageBox.Show("No hay datos por mostrar. ¡Intente registrar usuarios!", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning); }
+            else                            // NO VACÍO
+            { CargarInfo(); LlenarPanel(); } 
+
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
