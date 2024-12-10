@@ -29,15 +29,64 @@ namespace ProyectoFinalFBD_Gestion_de_Inicios_de_Sesion
         int ID = 0;
 
 
+
+        private static Main instancia = null; //Inicializacion del formulario estatico
+
+        //Método para obtener solamente un formulario abierto de tipo "frmMenu_ESA"
+        public static Main ventanaUnica()
+        {
+            //Evaluar 
+            if (instancia == null)
+            {
+                //Crear uno nuevo
+                instancia = new Main();
+                return instancia;
+            }
+            //Regresar el que se creo con anterioridad
+            return instancia;
+        }
+
         //Constructor
         public Main()
         {
             InitializeComponent();
-            ProcesarEstadoDeSesion(); // Inicializar proceso
-
             timerInactividad.Start(); // Inicializar temporizador
         }
 
+
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            ProcesarSalidaDeLaSesion();
+            this.Hide();
+            Program.loginEstatico.Show();
+        }
+
+        // Procedimiento de evento al salir de formulario
+        private void Main_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            ProcesarSalidaDeLaSesion(); 
+            instancia = null;
+            Application.Exit(); 
+        }
+
+
+        // Procedimiento que agrega "FechaDeSalida" en el registro
+        private void ProcesarSalidaDeLaSesion()
+        {
+            // Emplear la conexión de la base de datos
+            using (SqlConnection con = BD_Conexion.GetConnection())
+            {
+                // Definir la consulta
+                query = "UPDATE EstadoDeLaSesion SET FechaDeSalida = @FechaDeSalida WHERE ID = @ID";
+                Comando = new SqlCommand(query, con);
+                Comando.Parameters.AddWithValue("@FechaDeSalida", currentDate = DateTime.Now);
+                Comando.Parameters.AddWithValue("@ID", ID);
+
+                // Realizar la consulta
+                try { Comando.ExecuteNonQuery(); }
+                catch (Exception ex) { MessageBox.Show("Error " + ex.Message); }
+            }
+        }
 
         // Procedimiento que registra la información relacionada con el estado actual de la sesión
         private void ProcesarEstadoDeSesion()
@@ -74,42 +123,11 @@ namespace ProyectoFinalFBD_Gestion_de_Inicios_de_Sesion
         }
 
 
-        private void btnSalir_Click(object sender, EventArgs e)
-        {
-            this.Close();
-            Program.loginEstatico.Show();
-        }
-
-
-        // Procedimiento de evento al salir de formulario
-        private void Main_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            ProcesarSalidaDeLaSesion();
-        }
-        // Procedimiento que agrega "FechaDeSalida" en el registro
-        private void ProcesarSalidaDeLaSesion()
-        {
-            // Emplear la conexión de la base de datos
-            using (SqlConnection con = BD_Conexion.GetConnection())
-            {
-                // Definir la consulta
-                query = "UPDATE EstadoDeLaSesion SET FechaDeSalida = @FechaDeSalida WHERE ID = @ID";
-                Comando = new SqlCommand(query, con);
-                Comando.Parameters.AddWithValue("@FechaDeSalida", currentDate = DateTime.Now);
-                Comando.Parameters.AddWithValue("@ID", ID);
-
-                // Realizar la consulta
-                try { Comando.ExecuteNonQuery(); }
-                catch (Exception ex) { MessageBox.Show("Error " + ex.Message); }
-            }
-        }
-
-
         // Procedimiento que maneja el evento del temporizador
         private void timerInactividad_Tick(object sender, EventArgs e)
         {
             // Evaluar tiempo de inactividad
-            if (DatosInactividad.GetInputIdleTime().TotalSeconds > 10) // 10 segundos
+            if (DatosInactividad.GetInputIdleTime().TotalSeconds > 3) // 3 segundos
             {   // Si el tiempo es considerable se guarda, de lo contrario lo ignora
 
                 // Emplear la conexión de la base de datos
@@ -146,6 +164,15 @@ namespace ProyectoFinalFBD_Gestion_de_Inicios_de_Sesion
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux)) { return 2; }
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX)) { return 3; }
             else { return null; }
+        }
+
+
+        // Procedimiento que válida la visibilidad del formulario por evento
+        private void Main_VisibleChanged(object sender, EventArgs e)
+        { 
+            // Validar
+            if (this.Visible)
+            { ProcesarEstadoDeSesion();} // Inicializar proceso
         }
     }
 }

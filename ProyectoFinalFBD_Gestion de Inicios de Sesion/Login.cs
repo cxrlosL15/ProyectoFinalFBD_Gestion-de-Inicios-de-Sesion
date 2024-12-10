@@ -77,7 +77,7 @@ namespace ProyectoFinalFBD_Gestion_de_Inicios_de_Sesion
                     txtContraseña.Text = ""; txtUsuario.Text = "";
 
                     // Ingreso al programa principal
-                    Main form = new Main();
+                    Main form = Main.ventanaUnica();
                     Program.loginEstatico.Hide();
                     form.Show();
                 }
