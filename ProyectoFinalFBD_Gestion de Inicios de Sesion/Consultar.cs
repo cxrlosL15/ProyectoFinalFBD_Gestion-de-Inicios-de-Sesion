@@ -190,8 +190,13 @@ namespace ProyectoFinalFBD_Gestion_de_Inicios_de_Sesion
                             {
                                 Comando.ExecuteNonQuery();
                                 MessageBox.Show("Registro Eliminado");
-                                ActualizarInfo(); // Reflejar en la tabla la eliminación
+
+                                // Reiniciar
                                 secuencia = 1; Index = 0;
+                                txtBuscar.Clear();
+                                txtIndexPanel.Visible = true;
+                                proceso = "Sin Búsqueda";
+                                ActualizarInfo();               // Reflejar en la tabla la eliminación
                                 Validar_EstadoInformacion();   // Reflejar en el panel la eliminación
                             }
                             catch (Exception ex)
@@ -221,8 +226,10 @@ namespace ProyectoFinalFBD_Gestion_de_Inicios_de_Sesion
                             {
                                 Comando.ExecuteNonQuery();
                                 MessageBox.Show("Registro Eliminado");
-                                ActualizarInfo(); // Reflejar en la tabla la eliminación
+
+                                // Reiniciar
                                 secuencia = 1; Index = 0;
+                                ActualizarInfo();               // Reflejar en la tabla la eliminación
                                 Validar_EstadoInformacion();   // Reflejar en el panel la eliminación
                             }
                             catch (Exception ex)
@@ -450,7 +457,7 @@ namespace ProyectoFinalFBD_Gestion_de_Inicios_de_Sesion
         { if (e.KeyChar == Convert.ToChar(Keys.Enter)) { txtTelefono.Focus(); } }
         private void txtTelefono_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar == Convert.ToChar(Keys.Enter)) { btnModificar.Focus(); }
+            if (e.KeyChar == Convert.ToChar(Keys.Tab)) { btnModificar.Focus(); }
             if ((e.KeyChar >= 32 && e.KeyChar <= 47) || (e.KeyChar >= 58 && e.KeyChar <= 255))
             {
                 MessageBox.Show("Solo se admiten números", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
