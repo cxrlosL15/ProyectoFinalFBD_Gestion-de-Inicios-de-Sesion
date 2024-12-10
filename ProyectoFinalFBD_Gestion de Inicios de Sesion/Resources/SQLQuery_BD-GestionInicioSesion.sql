@@ -25,7 +25,7 @@ CREATE TABLE Usuarios (
     Contrasena VARCHAR(255) NOT NULL,
     FechaDeRegistro DATETIME NOT NULL,
     CorreoElectronico VARCHAR(100) NOT NULL UNIQUE,
-    Telefono INT NOT NULL UNIQUE,
+    Telefono VARCHAR(20) NOT NULL UNIQUE,
     Nombre VARCHAR(50) NOT NULL,
     ApellidoP VARCHAR(50) NOT NULL,
     ApellidoM VARCHAR(50) NOT NULL,

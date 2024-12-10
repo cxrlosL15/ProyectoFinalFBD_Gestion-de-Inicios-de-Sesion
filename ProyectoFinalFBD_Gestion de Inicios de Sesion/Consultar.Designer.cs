@@ -56,6 +56,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.btnEliminar = new System.Windows.Forms.Button();
             this.btnModificar = new System.Windows.Forms.Button();
+            this.txtContraseña = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRegistros)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbForward)).BeginInit();
@@ -89,7 +91,7 @@
             this.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSalir.Font = new System.Drawing.Font("Bahnschrift", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSalir.ForeColor = System.Drawing.Color.White;
-            this.btnSalir.Location = new System.Drawing.Point(12, 524);
+            this.btnSalir.Location = new System.Drawing.Point(12, 534);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(333, 34);
             this.btnSalir.TabIndex = 13;
@@ -99,6 +101,8 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.txtContraseña);
+            this.panel2.Controls.Add(this.label3);
             this.panel2.Controls.Add(this.txtSexo);
             this.panel2.Controls.Add(this.txtEdad);
             this.panel2.Controls.Add(this.label10);
@@ -117,14 +121,14 @@
             this.panel2.Controls.Add(this.label11);
             this.panel2.Location = new System.Drawing.Point(17, 98);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(334, 303);
+            this.panel2.Size = new System.Drawing.Size(334, 313);
             this.panel2.TabIndex = 17;
             // 
             // txtSexo
             // 
             this.txtSexo.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtSexo.Enabled = false;
-            this.txtSexo.Location = new System.Drawing.Point(157, 257);
+            this.txtSexo.Location = new System.Drawing.Point(157, 279);
             this.txtSexo.Multiline = true;
             this.txtSexo.Name = "txtSexo";
             this.txtSexo.Size = new System.Drawing.Size(159, 17);
@@ -134,7 +138,7 @@
             // 
             this.txtEdad.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtEdad.Enabled = false;
-            this.txtEdad.Location = new System.Drawing.Point(157, 223);
+            this.txtEdad.Location = new System.Drawing.Point(157, 245);
             this.txtEdad.Multiline = true;
             this.txtEdad.Name = "txtEdad";
             this.txtEdad.Size = new System.Drawing.Size(159, 17);
@@ -144,7 +148,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.label10.Location = new System.Drawing.Point(13, 257);
+            this.label10.Location = new System.Drawing.Point(13, 279);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(45, 17);
             this.label10.TabIndex = 17;
@@ -154,7 +158,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.label9.Location = new System.Drawing.Point(13, 223);
+            this.label9.Location = new System.Drawing.Point(13, 245);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(46, 17);
             this.label9.TabIndex = 16;
@@ -164,7 +168,7 @@
             // 
             this.txtApellidoP.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtApellidoP.Enabled = false;
-            this.txtApellidoP.Location = new System.Drawing.Point(157, 189);
+            this.txtApellidoP.Location = new System.Drawing.Point(157, 211);
             this.txtApellidoP.Multiline = true;
             this.txtApellidoP.Name = "txtApellidoP";
             this.txtApellidoP.Size = new System.Drawing.Size(159, 17);
@@ -174,7 +178,7 @@
             // 
             this.txtApellidoM.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtApellidoM.Enabled = false;
-            this.txtApellidoM.Location = new System.Drawing.Point(157, 157);
+            this.txtApellidoM.Location = new System.Drawing.Point(157, 179);
             this.txtApellidoM.Multiline = true;
             this.txtApellidoM.Name = "txtApellidoM";
             this.txtApellidoM.Size = new System.Drawing.Size(159, 17);
@@ -184,7 +188,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.label8.Location = new System.Drawing.Point(13, 189);
+            this.label8.Location = new System.Drawing.Point(13, 211);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(117, 17);
             this.label8.TabIndex = 13;
@@ -194,7 +198,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.label7.Location = new System.Drawing.Point(13, 154);
+            this.label7.Location = new System.Drawing.Point(13, 176);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(118, 17);
             this.label7.TabIndex = 12;
@@ -204,7 +208,7 @@
             // 
             this.txtNombre.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtNombre.Enabled = false;
-            this.txtNombre.Location = new System.Drawing.Point(157, 125);
+            this.txtNombre.Location = new System.Drawing.Point(157, 147);
             this.txtNombre.Multiline = true;
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(159, 17);
@@ -214,7 +218,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.label6.Location = new System.Drawing.Point(13, 125);
+            this.label6.Location = new System.Drawing.Point(13, 147);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(64, 17);
             this.label6.TabIndex = 10;
@@ -224,7 +228,7 @@
             // 
             this.txtTelefono.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtTelefono.Enabled = false;
-            this.txtTelefono.Location = new System.Drawing.Point(157, 93);
+            this.txtTelefono.Location = new System.Drawing.Point(157, 115);
             this.txtTelefono.Multiline = true;
             this.txtTelefono.Name = "txtTelefono";
             this.txtTelefono.Size = new System.Drawing.Size(159, 17);
@@ -234,7 +238,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.label5.Location = new System.Drawing.Point(13, 93);
+            this.label5.Location = new System.Drawing.Point(13, 115);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(66, 17);
             this.label5.TabIndex = 8;
@@ -244,7 +248,7 @@
             // 
             this.txtEmail.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtEmail.Enabled = false;
-            this.txtEmail.Location = new System.Drawing.Point(157, 59);
+            this.txtEmail.Location = new System.Drawing.Point(157, 81);
             this.txtEmail.Multiline = true;
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(159, 17);
@@ -254,7 +258,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.label4.Location = new System.Drawing.Point(13, 56);
+            this.label4.Location = new System.Drawing.Point(13, 81);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(134, 17);
             this.label4.TabIndex = 6;
@@ -286,7 +290,7 @@
             this.txtIndexPanel.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtIndexPanel.Enabled = false;
             this.txtIndexPanel.Font = new System.Drawing.Font("Impact", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtIndexPanel.Location = new System.Drawing.Point(175, 407);
+            this.txtIndexPanel.Location = new System.Drawing.Point(175, 417);
             this.txtIndexPanel.Multiline = true;
             this.txtIndexPanel.Name = "txtIndexPanel";
             this.txtIndexPanel.Size = new System.Drawing.Size(36, 48);
@@ -297,7 +301,7 @@
             // 
             this.pbForward.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbForward.Image = global::ProyectoFinalFBD_Gestion_de_Inicios_de_Sesion.Properties.Resources.ForwardFx;
-            this.pbForward.Location = new System.Drawing.Point(225, 407);
+            this.pbForward.Location = new System.Drawing.Point(225, 417);
             this.pbForward.Name = "pbForward";
             this.pbForward.Size = new System.Drawing.Size(48, 48);
             this.pbForward.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -309,7 +313,7 @@
             // 
             this.pbBack.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbBack.Image = global::ProyectoFinalFBD_Gestion_de_Inicios_de_Sesion.Properties.Resources.BackFix;
-            this.pbBack.Location = new System.Drawing.Point(91, 407);
+            this.pbBack.Location = new System.Drawing.Point(91, 417);
             this.pbBack.Name = "pbBack";
             this.pbBack.Size = new System.Drawing.Size(48, 48);
             this.pbBack.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -354,7 +358,7 @@
             this.btnEliminar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEliminar.Font = new System.Drawing.Font("Bahnschrift", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEliminar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(103)))), ((int)(((byte)(206)))));
-            this.btnEliminar.Location = new System.Drawing.Point(12, 475);
+            this.btnEliminar.Location = new System.Drawing.Point(12, 485);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(156, 34);
             this.btnEliminar.TabIndex = 24;
@@ -369,19 +373,40 @@
             this.btnModificar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnModificar.Font = new System.Drawing.Font("Bahnschrift", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnModificar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(103)))), ((int)(((byte)(206)))));
-            this.btnModificar.Location = new System.Drawing.Point(186, 475);
+            this.btnModificar.Location = new System.Drawing.Point(186, 485);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(159, 34);
             this.btnModificar.TabIndex = 25;
             this.btnModificar.Text = "MODIFICAR";
             this.btnModificar.UseVisualStyleBackColor = false;
+            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
+            // 
+            // txtContraseña
+            // 
+            this.txtContraseña.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtContraseña.Enabled = false;
+            this.txtContraseña.Location = new System.Drawing.Point(157, 52);
+            this.txtContraseña.Multiline = true;
+            this.txtContraseña.Name = "txtContraseña";
+            this.txtContraseña.Size = new System.Drawing.Size(159, 17);
+            this.txtContraseña.TabIndex = 21;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.label3.Location = new System.Drawing.Point(13, 52);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(88, 17);
+            this.label3.TabIndex = 20;
+            this.label3.Text = "Contraseña:";
             // 
             // Consultar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.GhostWhite;
-            this.ClientSize = new System.Drawing.Size(363, 567);
+            this.ClientSize = new System.Drawing.Size(363, 583);
             this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.btnEliminar);
             this.Controls.Add(this.txtBuscar);
@@ -438,5 +463,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnEliminar;
         private System.Windows.Forms.Button btnModificar;
+        private System.Windows.Forms.TextBox txtContraseña;
+        private System.Windows.Forms.Label label3;
     }
 }

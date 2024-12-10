@@ -51,7 +51,6 @@ namespace ProyectoFinalFBD_Gestion_de_Inicios_de_Sesion
             { MessageBox.Show("No hay datos por mostrar. ¡Intente registrar usuarios!", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning); }
             else                            // NO VACÍO
             {  LlenarPanel(); } 
-
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
@@ -100,6 +99,7 @@ namespace ProyectoFinalFBD_Gestion_de_Inicios_de_Sesion
         {
             // Proceso funcional para mostrar la información en el panel
             txtUsuario.Text = dgvRegistros.Rows[0].Cells[1].Value.ToString();
+            txtContraseña.Text = dgvRegistros.Rows[0].Cells[2].Value.ToString();
             txtEmail.Text = dgvRegistros.Rows[0].Cells[4].Value.ToString();
             txtTelefono.Text = dgvRegistros.Rows[0].Cells[5].Value.ToString();
             txtNombre.Text = dgvRegistros.Rows[0].Cells[6].Value.ToString();
@@ -124,6 +124,7 @@ namespace ProyectoFinalFBD_Gestion_de_Inicios_de_Sesion
                 // Proceso funcional para mostrar la información en el panel
                 Index--;
                 txtUsuario.Text = dgvRegistros.Rows[Index].Cells[1].Value.ToString();
+                txtContraseña.Text = dgvRegistros.Rows[Index].Cells[2].Value.ToString();
                 txtEmail.Text = dgvRegistros.Rows[Index].Cells[4].Value.ToString();
                 txtTelefono.Text = dgvRegistros.Rows[Index].Cells[5].Value.ToString();
                 txtNombre.Text = dgvRegistros.Rows[Index].Cells[6].Value.ToString();
@@ -149,6 +150,7 @@ namespace ProyectoFinalFBD_Gestion_de_Inicios_de_Sesion
                 // Proceso funcional para mostrar la información en el panel
                 Index++;
                 txtUsuario.Text = dgvRegistros.Rows[Index].Cells[1].Value.ToString();
+                txtContraseña.Text = dgvRegistros.Rows[Index].Cells[2].Value.ToString();
                 txtEmail.Text = dgvRegistros.Rows[Index].Cells[4].Value.ToString();
                 txtTelefono.Text = dgvRegistros.Rows[Index].Cells[5].Value.ToString();
                 txtNombre.Text = dgvRegistros.Rows[Index].Cells[6].Value.ToString();
@@ -200,11 +202,73 @@ namespace ProyectoFinalFBD_Gestion_de_Inicios_de_Sesion
             { throw new Exception("Seleccione una fila para eliminar."); }
         }
 
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            // Evaluar selección
+            if(txtUsuario.Enabled == false && txtUsuario.Enabled == false && txtEmail.Enabled == false && txtTelefono.Enabled == false && txtNombre.Enabled == false)
+            {
+                // EDICIÓN
+
+                txtUsuario.Enabled = true;
+                txtContraseña.Enabled = true;
+                txtEmail.Enabled = true;
+                txtTelefono.Enabled = true;
+
+                btnModificar.Text = "CONFIRMAR";
+                btnModificar.ForeColor = Color.Red;
+
+            }
+            else
+            {
+                // CONFIRMACIÓN
+
+                if (ValidarCampoVacio()) // Comprobar
+                {
+                    txtUsuario.Enabled = false;
+                    txtContraseña.Enabled = false;
+                    txtEmail.Enabled = false;
+                    txtTelefono.Enabled = false;
+                    btnModificar.Text = "MODIFICAR";
+                    btnModificar.ForeColor = Color.FromArgb(40, 103, 206);
+
+                    // Emplear la conexión de la base de datos
+                    using (SqlConnection con = BD_Conexion.GetConnection())
+                    {
+                        // Definir la consulta
+                        query = "UPDATE Usuarios SET Usuario = @Usuario, Contrasena = @Contrasena, CorreoElectronico = @CorreoElectronico, @Telefono = Telefono WHERE ID = @ID";
+                        Comando = new SqlCommand(query, con);
+
+                        Comando.Parameters.AddWithValue("@Usuario", txtUsuario.Text);
+                        Comando.Parameters.AddWithValue("@Contrasena", txtContraseña.Text);
+                        Comando.Parameters.AddWithValue("@CorreoElectronico", txtEmail.Text);
+                        Comando.Parameters.AddWithValue("@Telefono", txtTelefono.Text);
+                        Comando.Parameters.AddWithValue("@ID", dgvRegistros.Rows[Index].Cells[0].Value.ToString());
+
+                        // Realizar la consulta
+                        try
+                        {
+                            Comando.ExecuteNonQuery();
+                            MessageBox.Show("Registro Actualizado!");
+                            ActualizarInfo();
+                        }
+                        catch (Exception ex) { MessageBox.Show("Error " + ex.Message); }
+                    }
+                }
+                else { MessageBox.Show("Se requiere llenar todos los campos"); }
+            }
+        }
+        
+
+
+
         // Procedimiento que maneja la búsqueda al cambiar el texto
         private void txtBuscar_TextChanged(object sender, EventArgs e)
-        {
+        {   // Verificar si el cuadro de texto no está vacío
             if (txtBuscar.Text != "")
             {
+                string criterio = txtBuscar.Text.ToUpper();  // Obtener el texto de búsqueda en mayúsculas //
+
+                txtIndexPanel.Visible = false;
                 dgvRegistros.CurrentCell = null;
 
                 //Recorrer filas para desaparecer todas
@@ -218,12 +282,43 @@ namespace ProyectoFinalFBD_Gestion_de_Inicios_de_Sesion
                     foreach (DataGridViewCell cell in row.Cells)
                     {
                         //Comparar celda con el textbox de busqueda
-                        if (cell.Value.ToString().ToUpper().IndexOf(txtBuscar.Text.ToUpper()) == 0)
-                        { row.Visible = true; break; }
+                        if (cell.Value != null && cell.Value.ToString().ToUpper().IndexOf(criterio) >= 0)//
+                        { 
+                            row.Visible = true; // Si encuentra una coincidencia, hace visible la fila
+
+                            // Asignar los valores de la primera fila visible a los TextBox
+                            txtUsuario.Text = row.Cells["Usuario"].Value.ToString();
+                            txtContraseña.Text = row.Cells["Contrasena"].Value.ToString();
+                            txtEmail.Text = row.Cells["CorreoElectronico"].Value.ToString();
+                            txtTelefono.Text = row.Cells["Telefono"].Value.ToString();
+                            txtNombre.Text = row.Cells["Nombre"].Value.ToString();
+                            txtApellidoP.Text = row.Cells["ApellidoP"].Value.ToString();
+                            txtApellidoM.Text = row.Cells["ApellidoM"].Value.ToString();
+                            txtEdad.Text = row.Cells["Edad"].Value.ToString();
+                            txtSexo.Text = row.Cells["Sexo"].Value.ToString();
+
+                            break; 
+                        }  
+                        
                     }
+                    
                 }
+            }  // Si el cuadro de búsqueda está vacío, actualizar la información
+            else { ActualizarInfo(); LlenarPanel(); txtIndexPanel.Visible = true;  }
+
+            // Evalua si no hay filas para reflejarlo en los textbox
+            if (!dgvRegistros.Rows.Cast<DataGridViewRow>().Any(row => row.Visible == true))
+            {   // No se encontraron filas que coincidan con la busqueda
+                txtUsuario.Clear();
+                txtContraseña.Clear();
+                txtEmail.Clear();
+                txtTelefono.Clear();
+                txtNombre.Clear();
+                txtApellidoP.Clear();
+                txtApellidoM.Clear();
+                txtEdad.Clear();
+                txtSexo.Clear();
             }
-            else { ActualizarInfo(); }
         }
 
 
@@ -249,6 +344,10 @@ namespace ProyectoFinalFBD_Gestion_de_Inicios_de_Sesion
             }
         }
 
-
+        // Función adicional
+        private bool ValidarCampoVacio()
+        {
+            return txtUsuario.Text != "" && txtContraseña.Text != "" && txtEmail.Text != "" && txtTelefono.Text != "";
+        }
     }
 }
