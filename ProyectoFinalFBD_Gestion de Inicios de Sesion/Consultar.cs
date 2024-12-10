@@ -17,10 +17,10 @@ namespace ProyectoFinalFBD_Gestion_de_Inicios_de_Sesion
     {
         // Variables
         SqlCommand Comando;
-        string query = "";
         SqlDataAdapter Adaptador = null;
         DataTable Tabla = new DataTable();
-        int Index = 0, indexMax, secuencia=1;
+        string query = "", proceso = "";
+        int Index = 0, indexMax, secuencia = 1;
 
 
 
@@ -45,21 +45,20 @@ namespace ProyectoFinalFBD_Gestion_de_Inicios_de_Sesion
         {
             InitializeComponent();
             CargarInfo();
-
-            // Comprobar si tiene datos por mostrar
-            if (dgvRegistros.Rows.Count == 0) // VACÍO
-            { MessageBox.Show("No hay datos por mostrar. ¡Intente registrar usuarios!", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning); }
-            else                            // NO VACÍO
-            {  LlenarPanel(); } 
+            Validar_EstadoInformacion();
         }
+
+
 
         private void btnSalir_Click(object sender, EventArgs e)
         {
             this.Hide();
             Program.loginEstatico.Show();
+            secuencia = 1; Index = 0; LlenarPanel(); 
         }
-
         private void Consultar_FormClosing(object sender, FormClosingEventArgs e) { instancia = null; Application.Exit(); }
+
+
 
         // Procedimiento que muestra inicialmente la información en el DataGridView
         private void CargarInfo()
@@ -91,8 +90,6 @@ namespace ProyectoFinalFBD_Gestion_de_Inicios_de_Sesion
                 dgvRegistros.DataSource = Tabla;
             }
         }
-
-
 
         // Procedimineto que inicializa la información en el panel
         private void LlenarPanel()
@@ -164,101 +161,128 @@ namespace ProyectoFinalFBD_Gestion_de_Inicios_de_Sesion
         }
 
 
+
         // Procedimiento que intenta eliminar un registro
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            int seleccion = dgvRegistros.CurrentRow.Index; // Guardar el indice seleccionado de la tabla
-
-            // Verificar si hay una fila seleccionada
-            if (dgvRegistros.CurrentRow != null && dgvRegistros.CurrentRow.Index > -1)
-            {
-                DialogResult confirmacion = MessageBox.Show("¿Está seguro que desea eliminar el registro?",
+            DialogResult confirmacion = MessageBox.Show("¿Está seguro que desea eliminar el registro?",
                     "Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
-                // Usuario confirma la eliminación
-                if (confirmacion == DialogResult.Yes)
+            if (confirmacion == DialogResult.Yes)
+            {
+                switch (proceso)
                 {
-                    // Emplear la conexión de la base de datos
-                    using (SqlConnection con = BD_Conexion.GetConnection())
-                    {
-                        // Definir la consulta
-                        query = "DELETE FROM Usuarios WHERE ID = @Id DELETE FROM IntentosDeSesion WHERE UsuarioID = @Id DELETE FROM EstadoDeLaSesion WHERE UsuarioID = @Id";
-                        Comando = new SqlCommand(query, con);
-                        Comando.Parameters.AddWithValue("@Id", dgvRegistros.Rows[seleccion].Cells[0].Value);
+                    case "Búsqueda Exitosa": // ELIMINAR MEDIANTE LA BÚSQUEDA
 
-                        // Realizar la consulta
-                        try
+                        break;
+
+
+                    case "Búsqueda Fallida": // NO APLICA ELIMINAR MEDIANTE LA BÚSQUEDA(RESULTADO NO ENCONTRADO)
+
+                        MessageBox.Show("No es posible realizar la operación. ¡No hay registro para eliminar!", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        break;
+
+
+                    case "Sin Búsqueda": // ELIMINAR MEDIANTE EL PANEL
+
+                        int ID = Convert.ToInt32(dgvRegistros.Rows[Index].Cells[0].Value.ToString()); // Guardar el indice 
+
+                        // Emplear la conexión de la base de datos
+                        using (SqlConnection con = BD_Conexion.GetConnection())
                         {
-                            Comando.ExecuteNonQuery();
-                            MessageBox.Show("Registro Eliminado");
-                            ActualizarInfo(); // Reflejar en la tabla la eliminación
+                            // Definir la consulta
+                            query = "DELETE FROM Usuarios WHERE ID = @Id DELETE FROM IntentosDeSesion WHERE UsuarioID = @Id DELETE FROM EstadoDeLaSesion WHERE UsuarioID = @Id";
+                            Comando = new SqlCommand(query, con);
+                            Comando.Parameters.AddWithValue("@Id", ID);
+
+                            // Realizar la consulta
+                            try
+                            {
+                                Comando.ExecuteNonQuery();
+                                MessageBox.Show("Registro Eliminado");
+                                ActualizarInfo(); // Reflejar en la tabla la eliminación
+                                secuencia = 1; Index = 0;
+                                Validar_EstadoInformacion();   // Reflejar en el panel la eliminación
+                            }
+                            catch (Exception ex)
+                            { MessageBox.Show("Error " + ex.Message); }
                         }
-                        catch (Exception ex)
-                        { MessageBox.Show("Error " + ex.Message); }
-                    }
+                        break;
                 }
             }
-            else
-            { throw new Exception("Seleccione una fila para eliminar."); }
+            
+
         }
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            // Evaluar selección
-            if(txtUsuario.Enabled == false && txtUsuario.Enabled == false && txtEmail.Enabled == false && txtTelefono.Enabled == false && txtNombre.Enabled == false)
+            switch(proceso)
             {
-                // EDICIÓN
+                case "Búsqueda Exitosa": // MODIFICAR MEDIANTE LA BÚSQUEDA
 
-                txtUsuario.Enabled = true;
-                txtContraseña.Enabled = true;
-                txtEmail.Enabled = true;
-                txtTelefono.Enabled = true;
+                    break;
+                case "Búsqueda Fallida": // NO APLICA MODIFICAR MEDIANTE LA BÚSQUEDA(RESULTADO NO ENCONTRADO)
 
-                btnModificar.Text = "CONFIRMAR";
-                btnModificar.ForeColor = Color.Red;
+                    break;
+                case "Sin Búsqueda": // MODIFICAR MEDIANTE EL PANEL
 
-            }
-            else
-            {
-                // CONFIRMACIÓN
-
-                if (ValidarCampoVacio()) // Comprobar
-                {
-                    txtUsuario.Enabled = false;
-                    txtContraseña.Enabled = false;
-                    txtEmail.Enabled = false;
-                    txtTelefono.Enabled = false;
-                    btnModificar.Text = "MODIFICAR";
-                    btnModificar.ForeColor = Color.FromArgb(40, 103, 206);
-
-                    // Emplear la conexión de la base de datos
-                    using (SqlConnection con = BD_Conexion.GetConnection())
+                    // Evaluar selección
+                    if (txtUsuario.Enabled == false && txtUsuario.Enabled == false && txtEmail.Enabled == false && txtTelefono.Enabled == false && txtNombre.Enabled == false)
                     {
-                        // Definir la consulta
-                        query = "UPDATE Usuarios SET Usuario = @Usuario, Contrasena = @Contrasena, CorreoElectronico = @CorreoElectronico, @Telefono = Telefono WHERE ID = @ID";
-                        Comando = new SqlCommand(query, con);
+                        // EDICIÓN
 
-                        Comando.Parameters.AddWithValue("@Usuario", txtUsuario.Text);
-                        Comando.Parameters.AddWithValue("@Contrasena", txtContraseña.Text);
-                        Comando.Parameters.AddWithValue("@CorreoElectronico", txtEmail.Text);
-                        Comando.Parameters.AddWithValue("@Telefono", txtTelefono.Text);
-                        Comando.Parameters.AddWithValue("@ID", dgvRegistros.Rows[Index].Cells[0].Value.ToString());
+                        txtUsuario.Enabled = true;
+                        txtContraseña.Enabled = true;
+                        txtEmail.Enabled = true;
+                        txtTelefono.Enabled = true;
 
-                        // Realizar la consulta
-                        try
-                        {
-                            Comando.ExecuteNonQuery();
-                            MessageBox.Show("Registro Actualizado!");
-                            ActualizarInfo();
-                        }
-                        catch (Exception ex) { MessageBox.Show("Error " + ex.Message); }
+                        btnModificar.Text = "CONFIRMAR";
+                        btnModificar.ForeColor = Color.Red;
                     }
-                }
-                else { MessageBox.Show("Se requiere llenar todos los campos"); }
+                    else
+                    {
+                        // CONFIRMACIÓN
+
+                        if (ValidarCampoVacio()) // Comprobar
+                        {
+                            txtUsuario.Enabled = false;
+                            txtContraseña.Enabled = false;
+                            txtEmail.Enabled = false;
+                            txtTelefono.Enabled = false;
+                            btnModificar.Text = "MODIFICAR";
+                            btnModificar.ForeColor = Color.FromArgb(40, 103, 206);
+
+                            // Emplear la conexión de la base de datos
+                            using (SqlConnection con = BD_Conexion.GetConnection())
+                            {
+                                // Definir la consulta
+                                query = "UPDATE Usuarios SET Usuario = @Usuario, Contrasena = @Contrasena, CorreoElectronico = @CorreoElectronico, @Telefono = Telefono WHERE ID = @ID";
+                                Comando = new SqlCommand(query, con);
+
+                                Comando.Parameters.AddWithValue("@Usuario", txtUsuario.Text);
+                                Comando.Parameters.AddWithValue("@Contrasena", txtContraseña.Text);
+                                Comando.Parameters.AddWithValue("@CorreoElectronico", txtEmail.Text);
+                                Comando.Parameters.AddWithValue("@Telefono", txtTelefono.Text);
+                                Comando.Parameters.AddWithValue("@ID", dgvRegistros.Rows[Index].Cells[0].Value.ToString());
+
+                                // Realizar la consulta
+                                try
+                                {
+                                    Comando.ExecuteNonQuery();
+                                    MessageBox.Show("Registro Actualizado!");
+                                    ActualizarInfo();
+                                }
+                                catch (Exception ex) { MessageBox.Show("Error " + ex.Message); }
+                            }
+                        }
+                        else { MessageBox.Show("Se requiere llenar todos los campos"); }
+                    }
+                    break;
             }
+
+            
         }
         
-
 
 
         // Procedimiento que maneja la búsqueda al cambiar el texto
@@ -301,10 +325,11 @@ namespace ProyectoFinalFBD_Gestion_de_Inicios_de_Sesion
                         }  
                         
                     }
-                    
                 }
+                proceso = "Búsqueda Exitosa";
+
             }  // Si el cuadro de búsqueda está vacío, actualizar la información
-            else { ActualizarInfo(); LlenarPanel(); txtIndexPanel.Visible = true;  }
+            else { ActualizarInfo(); LlenarPanel(); txtIndexPanel.Visible = true; proceso = "Sin Búsqueda"; }
 
             // Evalua si no hay filas para reflejarlo en los textbox
             if (!dgvRegistros.Rows.Cast<DataGridViewRow>().Any(row => row.Visible == true))
@@ -318,10 +343,26 @@ namespace ProyectoFinalFBD_Gestion_de_Inicios_de_Sesion
                 txtApellidoM.Clear();
                 txtEdad.Clear();
                 txtSexo.Clear();
+
+                proceso = "Búsqueda Fallida";
             }
         }
 
 
+
+        
+        // Funciones adicionales
+        private bool ValidarCampoVacio()
+        { return txtUsuario.Text != "" && txtContraseña.Text != "" && txtEmail.Text != "" && txtTelefono.Text != ""; }
+        private void Validar_EstadoInformacion()
+        {
+            // Comprobar si tiene datos por mostrar
+            if (dgvRegistros.Rows.Count == 0) // VACÍO
+            { MessageBox.Show("No hay datos por mostrar. ¡Intente registrar usuarios!", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning); this.Hide(); Program.loginEstatico.Show(); }
+            else                            // NO VACÍO
+            { LlenarPanel(); }
+        }
+       
         // Función que intenta obtener la totalidad de registro
         private int? TotalRegistros()
         {
@@ -342,12 +383,6 @@ namespace ProyectoFinalFBD_Gestion_de_Inicios_de_Sesion
                 }
                 else { return null; }
             }
-        }
-
-        // Función adicional
-        private bool ValidarCampoVacio()
-        {
-            return txtUsuario.Text != "" && txtContraseña.Text != "" && txtEmail.Text != "" && txtTelefono.Text != "";
         }
     }
 }

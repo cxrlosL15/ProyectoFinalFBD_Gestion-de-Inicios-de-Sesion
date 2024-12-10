@@ -142,6 +142,7 @@ namespace ProyectoFinalFBD_Gestion_de_Inicios_de_Sesion
         { if (e.KeyChar == Convert.ToChar(Keys.Enter)) { txtEmail.Focus(); } }
         private void txtEmail_KeyPress(object sender, KeyPressEventArgs e)
         { if (e.KeyChar == Convert.ToChar(Keys.Enter)) { txtTelefono.Focus(); } }
+        // CONSIDERAR TIPO DE DATO EN BD
         private void txtTelefono_KeyPress(object sender, KeyPressEventArgs e)
         { 
             if (e.KeyChar == Convert.ToChar(Keys.Enter)) { txtNombre.Focus(); }
