@@ -148,7 +148,7 @@ namespace ProyectoFinalFBD_Gestion_de_Inicios_de_Sesion
             if (e.KeyChar == Convert.ToChar(Keys.Enter)) { txtNombre.Focus(); }
             if ((e.KeyChar >= 32 && e.KeyChar <= 47) || (e.KeyChar >= 58 && e.KeyChar <= 255))
             {
-                MessageBox.Show("Solo se admiten numeros", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Solo se admiten números", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 e.Handled = true; return;
             }
         }
@@ -184,7 +184,7 @@ namespace ProyectoFinalFBD_Gestion_de_Inicios_de_Sesion
             if (e.KeyChar == Convert.ToChar(Keys.Enter)) { cmbSexo.Focus(); }
             if ((e.KeyChar >= 32 && e.KeyChar <= 47) || (e.KeyChar >= 58 && e.KeyChar <= 255))
             {
-                MessageBox.Show("Solo se admiten numeros", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Solo se admiten números", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 e.Handled = true; return;
             }
         }
