@@ -51,6 +51,11 @@
             this.txtIndexPanel = new System.Windows.Forms.TextBox();
             this.pbForward = new System.Windows.Forms.PictureBox();
             this.pbBack = new System.Windows.Forms.PictureBox();
+            this.txtBuscar = new System.Windows.Forms.TextBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.btnEliminar = new System.Windows.Forms.Button();
+            this.btnModificar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRegistros)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbForward)).BeginInit();
@@ -84,7 +89,7 @@
             this.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSalir.Font = new System.Drawing.Font("Bahnschrift", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSalir.ForeColor = System.Drawing.Color.White;
-            this.btnSalir.Location = new System.Drawing.Point(19, 432);
+            this.btnSalir.Location = new System.Drawing.Point(12, 524);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(333, 34);
             this.btnSalir.TabIndex = 13;
@@ -110,7 +115,7 @@
             this.panel2.Controls.Add(this.label4);
             this.panel2.Controls.Add(this.txtUsuario);
             this.panel2.Controls.Add(this.label11);
-            this.panel2.Location = new System.Drawing.Point(18, 57);
+            this.panel2.Location = new System.Drawing.Point(17, 98);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(334, 303);
             this.panel2.TabIndex = 17;
@@ -281,7 +286,7 @@
             this.txtIndexPanel.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtIndexPanel.Enabled = false;
             this.txtIndexPanel.Font = new System.Drawing.Font("Impact", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtIndexPanel.Location = new System.Drawing.Point(176, 369);
+            this.txtIndexPanel.Location = new System.Drawing.Point(175, 407);
             this.txtIndexPanel.Multiline = true;
             this.txtIndexPanel.Name = "txtIndexPanel";
             this.txtIndexPanel.Size = new System.Drawing.Size(36, 48);
@@ -292,7 +297,7 @@
             // 
             this.pbForward.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbForward.Image = global::ProyectoFinalFBD_Gestion_de_Inicios_de_Sesion.Properties.Resources.ForwardFx;
-            this.pbForward.Location = new System.Drawing.Point(226, 369);
+            this.pbForward.Location = new System.Drawing.Point(225, 407);
             this.pbForward.Name = "pbForward";
             this.pbForward.Size = new System.Drawing.Size(48, 48);
             this.pbForward.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -304,7 +309,7 @@
             // 
             this.pbBack.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbBack.Image = global::ProyectoFinalFBD_Gestion_de_Inicios_de_Sesion.Properties.Resources.BackFix;
-            this.pbBack.Location = new System.Drawing.Point(92, 369);
+            this.pbBack.Location = new System.Drawing.Point(91, 407);
             this.pbBack.Name = "pbBack";
             this.pbBack.Size = new System.Drawing.Size(48, 48);
             this.pbBack.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -312,12 +317,76 @@
             this.pbBack.TabStop = false;
             this.pbBack.Click += new System.EventHandler(this.pbBack_Click);
             // 
+            // txtBuscar
+            // 
+            this.txtBuscar.BackColor = System.Drawing.Color.GhostWhite;
+            this.txtBuscar.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtBuscar.Location = new System.Drawing.Point(100, 47);
+            this.txtBuscar.Multiline = true;
+            this.txtBuscar.Name = "txtBuscar";
+            this.txtBuscar.Size = new System.Drawing.Size(251, 29);
+            this.txtBuscar.TabIndex = 22;
+            this.txtBuscar.TextChanged += new System.EventHandler(this.txtBuscar_TextChanged);
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(189)))), ((int)(((byte)(210)))), ((int)(((byte)(239)))));
+            this.panel1.Location = new System.Drawing.Point(100, 77);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(250, 2);
+            this.panel1.TabIndex = 23;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.Black;
+            this.label2.Location = new System.Drawing.Point(13, 56);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(90, 23);
+            this.label2.TabIndex = 21;
+            this.label2.Text = "Buscar:";
+            // 
+            // btnEliminar
+            // 
+            this.btnEliminar.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.btnEliminar.FlatAppearance.BorderSize = 0;
+            this.btnEliminar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEliminar.Font = new System.Drawing.Font("Bahnschrift", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEliminar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(103)))), ((int)(((byte)(206)))));
+            this.btnEliminar.Location = new System.Drawing.Point(12, 475);
+            this.btnEliminar.Name = "btnEliminar";
+            this.btnEliminar.Size = new System.Drawing.Size(156, 34);
+            this.btnEliminar.TabIndex = 24;
+            this.btnEliminar.Text = "ELIMINAR";
+            this.btnEliminar.UseVisualStyleBackColor = false;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
+            // 
+            // btnModificar
+            // 
+            this.btnModificar.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.btnModificar.FlatAppearance.BorderSize = 0;
+            this.btnModificar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnModificar.Font = new System.Drawing.Font("Bahnschrift", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnModificar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(103)))), ((int)(((byte)(206)))));
+            this.btnModificar.Location = new System.Drawing.Point(186, 475);
+            this.btnModificar.Name = "btnModificar";
+            this.btnModificar.Size = new System.Drawing.Size(159, 34);
+            this.btnModificar.TabIndex = 25;
+            this.btnModificar.Text = "MODIFICAR";
+            this.btnModificar.UseVisualStyleBackColor = false;
+            // 
             // Consultar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.GhostWhite;
-            this.ClientSize = new System.Drawing.Size(368, 479);
+            this.ClientSize = new System.Drawing.Size(363, 567);
+            this.Controls.Add(this.btnModificar);
+            this.Controls.Add(this.btnEliminar);
+            this.Controls.Add(this.txtBuscar);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.txtIndexPanel);
             this.Controls.Add(this.pbForward);
             this.Controls.Add(this.pbBack);
@@ -364,5 +433,10 @@
         private System.Windows.Forms.PictureBox pbForward;
         private System.Windows.Forms.TextBox txtSexo;
         private System.Windows.Forms.TextBox txtIndexPanel;
+        private System.Windows.Forms.TextBox txtBuscar;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button btnEliminar;
+        private System.Windows.Forms.Button btnModificar;
     }
 }

@@ -39,14 +39,18 @@ namespace ProyectoFinalFBD_Gestion_de_Inicios_de_Sesion
 
         private void btnConsultar_Click(object sender, EventArgs e)
         {
-            Consultar form = new Consultar();
+            txtContraseña.Clear(); txtUsuario.Clear();
+
+            Consultar form = Consultar.ventanaUnica(); // Validar estado de la instancia
             Program.loginEstatico.Hide();
             form.Show();
         }
 
         private void btnRegistrar_Click(object sender, EventArgs e)
         {
-            Registrar form = new Registrar();
+            txtContraseña.Clear(); txtUsuario.Clear();
+
+            Registrar form = Registrar.ventanaUnica(); // Validar estado de la instancia
             Program.loginEstatico.Hide();
             form.Show();
         }

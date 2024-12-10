@@ -17,18 +17,32 @@ namespace ProyectoFinalFBD_Gestion_de_Inicios_de_Sesion
         // Variables
         SqlCommand Comando;
         string query = "";
-        SqlDataAdapter Adaptador = null;
-        DataTable Tabla = new DataTable();
 
         DateTime currentDate;
         int tipoSexo;
 
 
+
+        private static Registrar instancia = null; //Inicializacion del formulario estatico
+
+        //Método para obtener solamente un formulario abierto de tipo "frmMenu_ESA"
+        public static Registrar ventanaUnica()
+        {
+            //Evaluar 
+            if (instancia == null)
+            {
+                //Crear uno nuevo
+                instancia = new Registrar();
+                return instancia;
+            }
+            //Regresar el que se creo con anterioridad
+            return instancia;
+        }
+
         // Constructor
         public Registrar()
         {
             InitializeComponent();
-            CargarInfo();
 
             // Inicializar elementos del comboBox
             cmbSexo.Items.Add("Masculino");
@@ -39,11 +53,12 @@ namespace ProyectoFinalFBD_Gestion_de_Inicios_de_Sesion
 
         private void btnSalir_Click(object sender, EventArgs e)
         {
-            this.Close();
+            this.Hide();
             Program.loginEstatico.Show();
         }
 
-        private void Registrar_FormClosing(object sender, FormClosingEventArgs e)   {  }
+        private void Registrar_FormClosing(object sender, FormClosingEventArgs e)   { instancia = null; Application.Exit(); }
+
 
         // Procedimiento que intenta registrar el usuario
         private void btnAgregar_Click(object sender, EventArgs e)
@@ -76,8 +91,7 @@ namespace ProyectoFinalFBD_Gestion_de_Inicios_de_Sesion
                         {
                             Comando.ExecuteNonQuery();
                             MessageBox.Show("Registro Insertado");
-                            LimpiarCampos(); ActualizarInfo();
-
+                            LimpiarCampos(); 
                         }
                         catch (Exception ex) { MessageBox.Show("Error " + ex.Message); }
                     }
@@ -85,76 +99,6 @@ namespace ProyectoFinalFBD_Gestion_de_Inicios_de_Sesion
                 else { MessageBox.Show("¡Edad fuera de rango!"); }
             }
             else { MessageBox.Show("Se requiere llenar todos los campos"); }
-        }
-
-
-        // Procedimiento que muestra inicialmente la información en el DataGridView
-        private void CargarInfo()
-        {
-            // Emplear la conexión de la base de datos
-            using (SqlConnection con = BD_Conexion.GetConnection())
-            {
-                // Consulta que relaciona al DataGridView como destino de los datos
-                // Se relaciona las tablas para recuperar datos de Usuarios.SexoID en Sexo.Descripcion
-                query = "SELECT Usuarios.ID, Usuarios.Usuario, Usuarios.Contrasena, Usuarios.FechaDeRegistro, Usuarios.CorreoElectronico, Usuarios.Telefono, Usuarios.Nombre, Usuarios.ApellidoP, Usuarios.ApellidoM, Usuarios.Edad," +
-                        "Sexo.Descripcion AS Sexo FROM [Usuarios] INNER JOIN Sexo ON Usuarios.SexoID = Sexo.ID";
-                Adaptador = new SqlDataAdapter(query, con);
-                Adaptador.Fill(Tabla);
-                dgvRegistros.DataSource = Tabla;
-            }
-        }
-
-        // Procedimiento que actualiza la información del DataGridView
-        private void ActualizarInfo()
-        {
-            Tabla.Clear();
-            dgvRegistros.ClearSelection();
-            using (SqlConnection con = BD_Conexion.GetConnection())
-            {
-                query = "SELECT Usuarios.ID, Usuarios.Usuario, Usuarios.Contrasena, Usuarios.FechaDeRegistro, Usuarios.CorreoElectronico, Usuarios.Telefono, Usuarios.Nombre, Usuarios.ApellidoP, Usuarios.ApellidoM, Usuarios.Edad," +
-                        "Sexo.Descripcion AS Sexo FROM [Usuarios] INNER JOIN Sexo ON Usuarios.SexoID = Sexo.ID";
-                Adaptador = new SqlDataAdapter(query, con);
-                Adaptador.Fill(Tabla);
-                dgvRegistros.DataSource = Tabla;
-            }
-        }
-
-        // Procedimiento que intenta eliminar un registro
-        private void btnEliminar_Click_1(object sender, EventArgs e)
-        {
-            int seleccion = dgvRegistros.CurrentRow.Index; // Guardar el indice seleccionado de la tabla
-
-            // Verificar si hay una fila seleccionada
-            if (dgvRegistros.CurrentRow != null && dgvRegistros.CurrentRow.Index > -1)
-            {
-                DialogResult confirmacion = MessageBox.Show("¿Está seguro que desea eliminar el registro?",
-                    "Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-
-                // Usuario confirma la eliminación
-                if (confirmacion == DialogResult.Yes)
-                {
-                    // Emplear la conexión de la base de datos
-                    using (SqlConnection con = BD_Conexion.GetConnection())
-                    {
-                        // Definir la consulta
-                        query = "DELETE FROM Usuarios WHERE ID = @Id DELETE FROM IntentosDeSesion WHERE UsuarioID = @Id DELETE FROM EstadoDeLaSesion WHERE UsuarioID = @Id";
-                        Comando = new SqlCommand(query, con);
-                        Comando.Parameters.AddWithValue("@Id", dgvRegistros.Rows[seleccion].Cells[0].Value);
-
-                        // Realizar la consulta
-                        try
-                        {
-                            Comando.ExecuteNonQuery();
-                            MessageBox.Show("Registro Eliminado");
-                            ActualizarInfo(); // Reflejar en la tabla la eliminación
-                        }
-                        catch (Exception ex)
-                        { MessageBox.Show("Error " + ex.Message); }
-                    }
-                }
-            }
-            else
-            { throw new Exception("Seleccione una fila para eliminar."); }
         }
 
 
@@ -190,32 +134,6 @@ namespace ProyectoFinalFBD_Gestion_de_Inicios_de_Sesion
             return x >= 18 && x <= 100;
         }
 
-
-        // Procedimiento que maneja la búsqueda al cambiar el texto
-        private void txtBuscar_TextChanged(object sender, EventArgs e)
-        {
-            if (txtBuscar.Text != "")
-            {
-                dgvRegistros.CurrentCell = null;
-
-                //Recorrer filas para desaparecer todas
-                foreach (DataGridViewRow row in dgvRegistros.Rows)
-                { row.Visible = false; }
-
-                //Se recorren las filas para buscar el valor
-                foreach (DataGridViewRow row in dgvRegistros.Rows)
-                {
-                    //Se recorre de celda en celda la fila del foreach anterior
-                    foreach (DataGridViewCell cell in row.Cells)
-                    {
-                        //Comparar celda con el textbox de busqueda
-                        if (cell.Value.ToString().ToUpper().IndexOf(txtBuscar.Text.ToUpper()) == 0)
-                        { row.Visible = true; break; }
-                    }
-                }
-            }
-            else { ActualizarInfo(); }
-        }
 
         // Procedimientos que maneja el evento
         private void txtUsuario_KeyPress(object sender, KeyPressEventArgs e)
